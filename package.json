@@ -6,7 +6,8 @@
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
-    "test-lint": "vue-cli-service lint --no-fix"
+    "test-lint": "vue-cli-service lint --no-fix",
+    "deploy": "vue-cli-ghpages"
   },
   "dependencies": {
     "vue": "^2.5.17",
@@ -24,6 +25,7 @@
     "pre-commit": "^1.2.2",
     "sass-loader": "^7.0.1",
     "typescript": "^3.0.0",
+    "vue-cli-ghpages": "^1.0.0",
     "vue-template-compiler": "^2.5.17"
   },
   "browserslist": [
