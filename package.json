@@ -6,8 +6,7 @@
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
-    "image:svg": "vsvg -s ./src/assets/img/svg-source -t ./src/assets/img/svg-compiled --ext ts --es6",
-    "deploy": "vue-cli-ghpages --name=\"CptSpaceToaster\" --email=CptSpaceToaster@gmail.com"
+    "image:svg": "vsvg -s ./src/assets/img/svg-source -t ./src/assets/img/svg-compiled --ext ts --es6"
   },
   "dependencies": {
     "@types/lodash": "^4.14.134",
@@ -29,7 +28,6 @@
     "node-sass": "^4.9.0",
     "sass-loader": "^7.1.0",
     "typescript": "^3.4.3",
-    "vue-cli-ghpages": "^1.0.0",
     "vue-template-compiler": "^2.5.21"
   },
   "postcss": {

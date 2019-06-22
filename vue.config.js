@@ -1,7 +1,5 @@
 module.exports = {
-  assetsDir: process.env.NODE_ENV === 'production'
-    ? '/pkmntcg-decklist/'
-    : '/',
+  publicPath: process.env.NODE_ENV === 'production' ? '/pkmntcg-decklist/' : '/',
   lintOnSave: true,
   configureWebpack: config => {
     return {
