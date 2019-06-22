@@ -1,0 +1,24 @@
+// this file should not contain any actual css classes, just mixins and defines
+@mixin row($spacing: 5px, $justify: flex-start, $align: center) {
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: row;
+  justify-content: $justify;
+  align-items: $align;
+
+  & > :not(:last-child) {
+    margin-right: $spacing;
+  }
+}
+
+@mixin stack($spacing: 5px, $justify: flex-start, $align: stretch) {
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: column;
+  justify-content: $justify;
+  align-items: $align;
+
+  & > :not(:last-child) {
+    margin-bottom: $spacing;
+  }
+}

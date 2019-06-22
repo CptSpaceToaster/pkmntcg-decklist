@@ -9,7 +9,8 @@ module.exports = {
         alias: {
           '@style': '@/assets/styles',
           '@font': '@/assets/fonts',
-          '@img': '@/assets/img'
+          '@img': '@/assets/img',
+          '@svg': '@/assets/img/svg-compiled',
         }
       }
     }

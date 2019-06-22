@@ -6,34 +6,43 @@
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
-    "test-lint": "vue-cli-service lint --no-fix",
-    "deploy": "vue-cli-ghpages"
+    "image:svg": "vsvg -s ./src/assets/img/svg-source -t ./src/assets/img/svg-compiled --ext ts --es6",
+    "deploy": "vue-cli-ghpages --name=\"CptSpaceToaster\" --email=CptSpaceToaster@gmail.com"
   },
   "dependencies": {
-    "vue": "^2.5.17",
-    "vue-class-component": "^6.0.0",
-    "vue-property-decorator": "^7.0.0",
-    "vue-router": "^3.0.1",
-    "vuex": "^3.0.1",
-    "webpack": "^4.25.1"
+    "@types/lodash": "^4.14.134",
+    "axios": "^0.19.0",
+    "lodash": "^4.17.11",
+    "pokemon-tcg-sdk-typescript": "^1.0.3",
+    "vue": "^2.6.10",
+    "vue-class-component": "^7.0.2",
+    "vue-multiselect": "^2.1.6",
+    "vue-property-decorator": "^8.1.0",
+    "vue-router": "^3.0.3",
+    "vue-svgicon": "^3.2.6",
+    "vuex": "^3.0.1"
   },
   "devDependencies": {
-    "@vue/cli-plugin-babel": "^3.1.0",
-    "@vue/cli-plugin-typescript": "^3.1.0",
-    "@vue/cli-service": "^3.1.0",
+    "@vue/cli-plugin-babel": "^3.7.0",
+    "@vue/cli-plugin-typescript": "^3.7.0",
+    "@vue/cli-service": "^3.7.0",
     "node-sass": "^4.9.0",
-    "pre-commit": "^1.2.2",
-    "sass-loader": "^7.0.1",
-    "typescript": "^3.0.0",
+    "sass-loader": "^7.1.0",
+    "typescript": "^3.4.3",
     "vue-cli-ghpages": "^1.0.0",
-    "vue-template-compiler": "^2.5.17"
+    "vue-template-compiler": "^2.5.21"
+  },
+  "postcss": {
+    "plugins": {
+      "autoprefixer": {}
+    }
   },
   "browserslist": [
     "> 1%",
     "last 2 versions",
     "not ie <= 8"
   ],
-  "pre-commit": [
-    "test-lint"
-  ]
+  "gitHooks": {
+    "pre-push": "yarn lint --no-fix"
+  }
 }
