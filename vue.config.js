@@ -1,6 +1,6 @@
 module.exports = {
   assetsDir: process.env.NODE_ENV === 'production'
-    ? 'https://cptspacetoaster.github.io/pkmntcg-decklist/'
+    ? '/pkmntcg-decklist/'
     : '/',
   lintOnSave: true,
   configureWebpack: config => {
