@@ -1,6 +1,6 @@
-import Decklist from '@/views/Decklist.vue';
 import Vue from 'vue';
 import Router from 'vue-router';
+import DecklistBuilder from '@/views/DecklistBuilder.vue';
 
 Vue.use(Router);
 
@@ -14,7 +14,10 @@ export default new Router({
     {
       name: 'decklist',
       path: '/decklist',
-      component: Decklist,
+      component: DecklistBuilder,
+      meta: {
+        navigationTitle: 'Pokemon TCG Decklist Creator',
+      },
     },
   ],
 });

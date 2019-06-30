@@ -1,7 +1,18 @@
 // this file should not contain any actual css classes, just mixins and defines
-$blue: #30a7d7;
-$dark-blue: #217496;
-$raven: #313131;
+$tan: #f1d1b5;
+$peach: #f0b7a4;
+$nectarine: #f18c8e;
+$raven: #305f72;
 
-$primary: $blue;
-$primary-darker: $dark-blue;
+$primary: $raven;
+$secondary: $tan;
+$tertiary: $nectarine;
+
+$text-color: darkslategray;
+$text-color-inverted: snow;
+$subhead-text-color: gray;
+$background-color: white;
+
+$transparent-light-button-color: dimgray;
+$transparent-light-button-background-color: transparent;
+$transparent-light-button-background-color-hover: rgba(black, 0.1);

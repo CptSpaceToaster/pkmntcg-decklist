@@ -2,15 +2,15 @@
   <div class="card" @click="cardClicked(card)">
     <img :src="card.imageUrl"/>
     <div class="card-name">{{card.name}}</div>
-    <div class="card-code">{{cardCode}}</div>
+    <div class="card-code subhead">{{cardCode}}</div>
   </div>
 </template>
 
 <script lang="ts">
-import { DECKLIST } from '@/store/actions';
-import { PokemonTCG } from 'pokemon-tcg-sdk-typescript';
 import Vue from 'vue';
 import { Component, Prop } from 'vue-property-decorator';
+import { PokemonTCG } from 'pokemon-tcg-sdk-typescript';
+import { DECKLIST } from '@/store/actions';
 
 @Component({
   components: {
@@ -30,6 +30,7 @@ export default class Card extends Vue {
 
 <style lang="scss">
 @import "@style/_structure.scss";
+@import "@style/_colors.scss";
 
 .card {
   @include stack($spacing: 5px);
@@ -40,11 +41,6 @@ export default class Card extends Vue {
 
   img {
     width: 100%;
-  }
-
-  .card-code {
-    color: grey;
-    text-transform: uppercase;
   }
 }
 </style>

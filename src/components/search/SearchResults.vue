@@ -24,10 +24,12 @@ export default class SearchResults extends Vue {
 
 <style lang="scss">
 @import "@style/_structure.scss";
+@import "@style/_colors.scss";
 
 .search-results {
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
+  padding: 20px;
 }
 </style>

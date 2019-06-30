@@ -1,7 +1,11 @@
 // this file should not contain any actual css classes, just mixins and defines
+$roboto-regular: 400;
+$roboto-bold: 700;
+$default--transition-duration: 0.3s;
+$default--min-clickable-height: 44px;
+
 @mixin row($spacing: 5px, $justify: flex-start, $align: center) {
   display: flex;
-  flex: 1 1 auto;
   flex-direction: row;
   justify-content: $justify;
   align-items: $align;
@@ -13,7 +17,6 @@
 
 @mixin stack($spacing: 5px, $justify: flex-start, $align: stretch) {
   display: flex;
-  flex: 1 1 auto;
   flex-direction: column;
   justify-content: $justify;
   align-items: $align;

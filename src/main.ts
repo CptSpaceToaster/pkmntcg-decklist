@@ -4,7 +4,9 @@ import router from '@/router';
 import store from '@/store';
 import SvgIcon from 'vue-svgicon';
 
+// import all SVG's
 import '@svg';
+
 Vue.use(SvgIcon, {
   tagName: 'svgicon',
 });

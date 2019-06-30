@@ -1,6 +1,7 @@
 <template>
   <div class="card-list">
-    <span>Card List</span>
+    <span class="title">Card List</span>
+    <span class="sep"></span>
     <div v-for="bundle in this.bundles" :key="bundle.card.id">
       <span>{{bundle.count}}</span><span>{{bundle.card.name}}</span>
     </div>
@@ -8,11 +9,11 @@
 </template>
 
 <script lang="ts">
+import Vue from 'vue';
 import globals from '@/globals';
+import { Component } from 'vue-property-decorator';
 import { DECKLIST } from '@/store/actions';
 import { Decklist, CardBundle } from '@/types/decklist';
-import Vue from 'vue';
-import { Component } from 'vue-property-decorator';
 
 @Component({
   components: {
@@ -34,5 +35,16 @@ export default class CardList extends Vue {
 
 .card-list {
   @include stack($spacing: 5px);
+  box-sizing: border-box;
+  padding: 10px;
+}
+
+.title {
+  font-size: 20px;
+}
+
+.sep {
+  height: 2px;
+  background: dimgray;
 }
 </style>
