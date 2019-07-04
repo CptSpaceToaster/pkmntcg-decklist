@@ -19,5 +19,10 @@ export default new Router({
         navigationTitle: 'Pokemon TCG Decklist Creator',
       },
     },
+    {
+      path: '*',
+      name: 'lost',
+      redirect: { name: 'home' },
+    },
   ],
 });

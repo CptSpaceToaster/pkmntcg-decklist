@@ -20,3 +20,5 @@ git commit -m "$MESSAGE"
 git push -f "$ORIGIN" master:gh-pages
 
 cd -
+
+echo "Deployed to https://cptspacetoaster.github.io/pkmntcg-decklist/#/"

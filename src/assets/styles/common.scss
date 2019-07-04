@@ -29,6 +29,7 @@ input {
 
 button {
   display: flex;
+  position:relative;
   flex-direction: row;
   justify-content: center;
   align-items: center;
@@ -52,11 +53,28 @@ button {
   &.transparent-light {
     color: $transparent-light-button-color;
     background-color: $transparent-light-button-background-color;
-    &:hover {
+  }
+
+  &:after {
+    content: "";
+    background-color: dimgray;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transition: all $default--transition-duration;
+  }
+
+  &:active:after {
+    opacity: 0.2;
+    transition: 0s
+  }
+}
+
+@media (hover: hover) {
+  button:hover {
+    &.transparent-light {
       background-color: $transparent-light-button-background-color-hover;
-      &:disabled {
-        background-color: $transparent-light-button-background-color;
-      }
     }
   }
 }
@@ -66,7 +84,6 @@ button {
   text-transform: uppercase;
   font-size: 14px;
 }
-
 
 // SVGs
 .svg-icon {

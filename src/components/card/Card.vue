@@ -1,6 +1,6 @@
 <template>
   <div class="card" @click="cardClicked(card)">
-    <img :src="card.imageUrl"/>
+    <img :src="card.imageUrl" v-tooltip="{ content: tooltipContent }"/>
     <div class="card-name">{{card.name}}</div>
     <div class="card-code subhead">{{cardCode}}</div>
   </div>
@@ -18,8 +18,18 @@ import { DECKLIST } from '@/store/actions';
 })
 export default class Card extends Vue {
   @Prop({ type: Object as () => PokemonTCG.Card }) public card!: PokemonTCG.Card;
+
   get cardCode(): string {
     return `${this.card.setCode} ${this.card.number}`;
+  }
+
+  get tooltipContent(): string {
+    return `
+      <div>
+        <p>${this.card}</p>
+        <img src="${this.card.imageUrl}"/>
+      </div>
+    `;
   }
 
   public cardClicked(card: PokemonTCG.Card) {
@@ -35,12 +45,22 @@ export default class Card extends Vue {
 .card {
   @include stack($spacing: 5px);
   margin: 10px;
-  width: 160px;
   text-align: center;
-  flex: 0 1 auto;
 
   img {
-    width: 100%;
+    width: 240px;
+    height: 335px;
+    border-radius: 12px;
   }
+
+  @media (max-width: 800px) {
+    width: inherit;
+  }
+}
+
+.potato {
+  width: 100px;
+  height: 100px;
+  background-color: red;
 }
 </style>

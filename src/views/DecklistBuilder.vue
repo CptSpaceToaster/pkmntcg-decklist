@@ -1,7 +1,6 @@
 <template>
   <div class="decklist">
     <SearchBar id="search-bar-container" @toggleDecklist="isCardlistShown = !isCardlistShown"/>
-    <!-- <button @click="isCardlistShown = !isCardlistShown">Click</button> -->
     <div class="workarea">
       <SearchResults id="search-results-container" :class="{'cardlist-shown': isCardlistShown}"/>
       <Cardlist id="card-list-container" :class="{'cardlist-shown': isCardlistShown}"/>
@@ -11,7 +10,7 @@
 
 <script lang="ts">
 import Vue from 'vue';
-import Cardlist from '@/components/cardlist/Cardlist.vue';
+import Cardlist from '@/components/Cardlist.vue';
 import SearchBar from '@/components/search/SearchBar.vue';
 import SearchResults from '@/components/search/SearchResults.vue';
 import { Component } from 'vue-property-decorator';
@@ -33,47 +32,45 @@ export default class DecklistBuilder extends Vue {
 @import "@style/_colors.scss";
 
 $cardlist-width: 300px;
-
-.decklist {
-  display: flex;
-  flex-direction: column;
-}
+$search-height: 70px;
 
 #search-bar-container {
-  flex: 1 0 auto;
+  position: sticky;
+  top: 0;
 }
 
 .workarea {
-  position: relative;
-  height: 100%;
+  display: flex;
+  align-items: flex-start;
 }
 
 #search-results-container {
-  position: absolute;
-  top: 0;
-  right: $cardlist-width;
-  bottom: 0;
-  left: 0;
-
-  transition: right $default--transition-duration ease;
-  overflow-y: auto;
+  flex: 1 1 auto;
+  transition: margin-right $default--transition-duration ease;
 
   &.cardlist-shown {
-    right: 0;
+    margin-right: -$cardlist-width;
+  }
+
+  @media (max-width: 800px) {
+    margin-right: -$cardlist-width;
   }
 }
 
 #card-list-container {
-  position: absolute;
-  top: 0;
-  right: 0;
+  flex: 0 0 $cardlist-width;
+  position: sticky;
+  top: $search-height;
   bottom: 0;
-  width: $cardlist-width;
+  min-height: calc(100vh - 70px);
+  overflow-y: auto;
+  background-color: white;
+  border-left: 1px solid black;
 
-  transition: right $default--transition-duration ease;
+  transition: transform $default--transition-duration ease;
 
   &.cardlist-shown {
-    right: -$cardlist-width;
+    transform: translateX($cardlist-width);
   }
 }
 </style>

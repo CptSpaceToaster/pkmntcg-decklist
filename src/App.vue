@@ -2,7 +2,6 @@
   <div>
     <navigation-header id="header-container"/>
     <router-view id="router-container"/>
-    <navigation-footer id="footer-container"/>
   </div>
 </template>
 
@@ -15,7 +14,6 @@ import { Component } from 'vue-property-decorator';
 @Component({
   components: {
     NavigationHeader,
-    NavigationFooter,
   },
 })
 export default class App extends Vue {
@@ -26,39 +24,28 @@ export default class App extends Vue {
 @import "@style/_structure.scss";
 @import "@style/_colors.scss";
 @import "@style/common.scss";
-
-$header-height: 70px;
+@import "@style/tooltip.scss";
 
 body {
-  width: 100vw;
-  height: 100vh;
   margin: 0;
+  overflow-x: hidden;
   > div {
-    width: 100%;
-    height: 100%;
+    min-height: 100vh;
+
     display: flex;
     flex-direction: column;
-    overflow: hidden;
   }
 }
 
 #header-container {
-  position: relative;
-  z-index: 200;
-  flex: 0;
-  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.5);
+  //box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.5);
 }
 
 #router-container {
-  position: relative;
-  z-index: 100;
-  flex: 1 1 auto;
+  flex: 1 0 auto;
 }
 
 #footer-container {
-  position: relative;
-  z-index: 200;
-  flex: 0;
-  box-shadow: 0 -2px 4px 0px rgba(0, 0, 0, 0.5);
+  // box-shadow: 0 -2px 4px 0px rgba(0, 0, 0, 0.5);
 }
 </style>

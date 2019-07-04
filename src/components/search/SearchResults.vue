@@ -5,7 +5,7 @@
 </template>
 
 <script lang="ts">
-import Card from '@/components/Card.vue';
+import Card from '@/components/card/Card.vue';
 import { PokemonTCG } from 'pokemon-tcg-sdk-typescript';
 import Vue from 'vue';
 import { Component } from 'vue-property-decorator';
@@ -28,6 +28,7 @@ export default class SearchResults extends Vue {
 
 .search-results {
   display: flex;
+  align-content: flex-start;
   justify-content: center;
   flex-wrap: wrap;
   padding: 20px;
