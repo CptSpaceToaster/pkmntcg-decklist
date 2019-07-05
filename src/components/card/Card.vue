@@ -24,12 +24,7 @@ export default class Card extends Vue {
   }
 
   get tooltipContent(): string {
-    return `
-      <div>
-        <p>${this.card}</p>
-        <img src="${this.card.imageUrl}"/>
-      </div>
-    `;
+    return `<img src="${this.card.imageUrl}"/>`;
   }
 
   public cardClicked(card: PokemonTCG.Card) {
@@ -49,18 +44,16 @@ export default class Card extends Vue {
 
   img {
     width: 240px;
-    height: 335px;
     border-radius: 12px;
   }
 
   @media (max-width: 800px) {
-    width: inherit;
-  }
-}
+    width: 100%;
+    img {
+      width: 100%;
+      height: auto;
+    }
 
-.potato {
-  width: 100px;
-  height: 100px;
-  background-color: red;
+  }
 }
 </style>

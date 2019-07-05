@@ -1,7 +1,7 @@
 <template>
   <div>
-    <navigation-header id="header-container"/>
-    <router-view id="router-container"/>
+    <navigation-header/>
+    <router-view/>
   </div>
 </template>
 
@@ -28,24 +28,6 @@ export default class App extends Vue {
 
 body {
   margin: 0;
-  overflow-x: hidden;
-  > div {
-    min-height: 100vh;
-
-    display: flex;
-    flex-direction: column;
-  }
-}
-
-#header-container {
-  //box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.5);
-}
-
-#router-container {
-  flex: 1 0 auto;
-}
-
-#footer-container {
-  // box-shadow: 0 -2px 4px 0px rgba(0, 0, 0, 0.5);
+  min-height: 100vh;
 }
 </style>

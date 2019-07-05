@@ -1,29 +1,27 @@
 <template>
   <div class="decklist">
-    <SearchBar id="search-bar-container" @toggleDecklist="isCardlistShown = !isCardlistShown"/>
-    <div class="workarea">
-      <SearchResults id="search-results-container" :class="{'cardlist-shown': isCardlistShown}"/>
-      <Cardlist id="card-list-container" :class="{'cardlist-shown': isCardlistShown}"/>
-    </div>
+    <SearchFilters id="search-bar-container"/>
+    <CardGrid id="card-grid-container" :class="{'card-stack-shown': isCardStackShown}"/>
+    <CardStack id="card-stack-container" :class="{'card-stack-shown': isCardStackShown}" @toggleDecklist="isCardStackShown = !isCardStackShown"/>
   </div>
 </template>
 
 <script lang="ts">
 import Vue from 'vue';
-import Cardlist from '@/components/Cardlist.vue';
-import SearchBar from '@/components/search/SearchBar.vue';
-import SearchResults from '@/components/search/SearchResults.vue';
+import CardGrid from '@/components/card/CardGrid.vue';
+import CardStack from '@/components/card/CardStack.vue';
+import SearchFilters from '@/components/search/SearchFilters.vue';
 import { Component } from 'vue-property-decorator';
 
 @Component({
   components: {
-    SearchBar,
-    SearchResults,
-    Cardlist,
+    SearchFilters,
+    CardGrid,
+    CardStack,
   },
 })
 export default class DecklistBuilder extends Vue {
-  private isCardlistShown = false;
+  private isCardStackShown = false;
 }
 </script>
 
@@ -31,7 +29,7 @@ export default class DecklistBuilder extends Vue {
 @import "@style/_structure.scss";
 @import "@style/_colors.scss";
 
-$cardlist-width: 300px;
+$card-stack-width: 300px;
 $search-height: 70px;
 
 #search-bar-container {
@@ -39,38 +37,32 @@ $search-height: 70px;
   top: 0;
 }
 
-.workarea {
-  display: flex;
-  align-items: flex-start;
-}
-
-#search-results-container {
-  flex: 1 1 auto;
-  transition: margin-right $default--transition-duration ease;
-
-  &.cardlist-shown {
-    margin-right: -$cardlist-width;
-  }
-
-  @media (max-width: 800px) {
-    margin-right: -$cardlist-width;
+#card-grid-container {
+  transition: padding-right $default--transition-duration ease;
+  &.card-stack-shown {
+    padding-right: $card-stack-width;
   }
 }
 
-#card-list-container {
-  flex: 0 0 $cardlist-width;
-  position: sticky;
-  top: $search-height;
-  bottom: 0;
-  min-height: calc(100vh - 70px);
+#card-stack-container {
+  position: fixed;
   overflow-y: auto;
-  background-color: white;
-  border-left: 1px solid black;
+  background-color: $background-color;
 
-  transition: transform $default--transition-duration ease;
+  bottom: calc(70px - 100%);
+  right: 0;
+  width: $card-stack-width;
+  height: 100%;
 
-  &.cardlist-shown {
-    transform: translateX($cardlist-width);
+  transition: bottom $default--transition-duration ease;
+
+  &.card-stack-shown {
+    bottom: 0;
   }
+}
+
+.fab {
+  bottom: 10px;
+  right: 10px;
 }
 </style>

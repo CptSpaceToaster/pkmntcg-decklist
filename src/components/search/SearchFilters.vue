@@ -4,9 +4,6 @@
       <label>Search</label>
       <input @input="searchCards" class="search-input"/>
     </span>
-    <button class="transparent-light" @click="$emit('toggleDecklist')">
-      <svgicon id="hamburger" name="hamburger" :original="true" />
-    </button>
   </div>
 </template>
 
@@ -21,8 +18,7 @@ import { SEARCH } from '@/store/actions';
   components: {
   },
 })
-export default class SearchBar extends Vue {
-
+export default class SearchFilters extends Vue {
   public dispatchSearch = debounce(() => {
     this.$store.dispatch(SEARCH.CARD);
   }, globals.debounceInterval);
@@ -51,6 +47,6 @@ export default class SearchBar extends Vue {
 }
 
 input {
-  padding: 5px;
+
 }
 </style>
