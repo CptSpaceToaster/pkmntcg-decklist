@@ -1,6 +1,6 @@
 <template>
   <div class="card-grid">
-    <Card v-for="card in cards" :key="card.id" :card="card"/>
+    <Card v-for="card in cards" :key="card.id" :card="card" @cardClicked="cardClicked(card)"/>
   </div>
 </template>
 
@@ -9,6 +9,7 @@ import Vue from 'vue';
 import Card from '@/components/card/Card.vue';
 import { Component } from 'vue-property-decorator';
 import { PokemonTCG } from 'pokemon-tcg-sdk-typescript';
+import { DECKLIST } from '@/store/actions';
 
 @Component({
   components: {
@@ -18,6 +19,10 @@ import { PokemonTCG } from 'pokemon-tcg-sdk-typescript';
 export default class CardGrid extends Vue {
   get cards(): PokemonTCG.Card[] {
     return this.$store.state.search.searchedCards;
+  }
+
+  public cardClicked(card: PokemonTCG.Card) {
+    this.$store.commit(DECKLIST.ADD_CARD, card);
   }
 }
 </script>

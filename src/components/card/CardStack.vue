@@ -1,37 +1,32 @@
 <template>
   <div class="card-stack">
-    <span class="card-stack-header">
-      <span>50/60</span>
-      <input class="title" placeholder="Deck Title"/>
-      <button class="transparent-light" @click="$emit('toggleDecklist')">
-        <svgicon id="hamburger" name="hamburger" :original="true" />
-      </button>
-    </span>
+    <CardStackHeader @toggleDecklist="$emit('toggleDecklist')"/>
     <div v-for="bundle in this.bundles" :key="bundle.card.id">
-      <span>{{bundle.count}}</span><span>{{bundle.card.name}}</span>
+      <CardBlade :bundle="bundle"/>
     </div>
-
-    <div class="blade"/>
-    <div class="blade"/>
-    <div class="blade"/>
   </div>
 </template>
 
 <script lang="ts">
 import Vue from 'vue';
 import globals from '@/globals';
+import CardStackHeader from '@/components/card/CardStackHeader.vue';
+import CardBlade from '@/components/card/CardBlade.vue';
 import { Component } from 'vue-property-decorator';
 import { DECKLIST } from '@/store/actions';
 import { Decklist, CardBundle } from '@/types/decklist';
 
 @Component({
   components: {
+    CardStackHeader,
+    CardBlade,
   },
 })
 export default class CardStack extends Vue {
   get decklist(): Decklist {
     return this.$store.state.decklist.decklist;
   }
+
   get bundles(): CardBundle[] {
     return this.decklist.bundles;
   }
@@ -45,14 +40,12 @@ export default class CardStack extends Vue {
 .card-stack {
   display: flex;
   flex-direction: column;
-  align-items: stretch;
 }
 
 .card-stack-header {
   display: flex;
   flex-direction: row;
   align-items: center;
-
   font-size: 20px;
 
   > * {
@@ -61,12 +54,8 @@ export default class CardStack extends Vue {
 }
 
 .title {
-  flex: 1 1 auto;
-}
-
-.blade {
-  height: $default--min-clickable-height;
-  width: 100%;
-  background-color: lightgray;
+  border: none;
+  outline: none;
+  min-width: 0;
 }
 </style>

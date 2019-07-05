@@ -5,11 +5,15 @@ export class Decklist {
   public bundles: CardBundle[] = [];
 
   public addCard(card: PokemonTCG.Card): boolean {
-    if (this.countMatchingNames(card.name) === 4) {
+    if (this.count >= 60) {
+      return false;
+    }
+    if (this.countMatchingNames(card.name) === this.cardLimit(card)) {
       return false;
     }
 
     const bundle = this.findMatchingBundle(card.id);
+    this.count++;
     if (bundle) {
       bundle.count++;
       return true;
@@ -22,6 +26,7 @@ export class Decklist {
   public removeCard(card: PokemonTCG.Card): boolean {
     const bundle = this.findMatchingBundle(card.id);
     if (bundle) {
+      this.count--;
       if (bundle.count > 1) {
         bundle.count--;
         return true;
@@ -51,6 +56,20 @@ export class Decklist {
       }
     }
     return count;
+  }
+
+  public cardLimit(card: any): number {
+    console.log(card);
+    if (card.supertype === 'Energy' && card.subtype === 'Basic') {
+      return 59;
+    }
+    if (card.name.endsWith('◇')) {
+      return 1;
+    }
+    if (card.rarity.includes('ACE')) {
+      return 1;
+    }
+    return 4;
   }
 }
 
