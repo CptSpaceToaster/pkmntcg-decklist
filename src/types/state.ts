@@ -5,6 +5,8 @@ import { PokemonTCG } from 'pokemon-tcg-sdk-typescript';
 // Root state specific
 export interface RootState {
   sets: PokemonTCG.Set[];
+  standardSets: PokemonTCG.Set[];
+  expandedSets: PokemonTCG.Set[];
   supertypes: string[];
   pokemonSubtypes: string[];
   trainerSubtypes: string[];

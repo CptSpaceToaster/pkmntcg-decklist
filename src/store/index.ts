@@ -1,5 +1,6 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
+import moment from 'moment';
 import { PokemonTCG } from 'pokemon-tcg-sdk-typescript';
 import { modules } from '@/store/modules';
 import { ROOT } from '@/store/actions';
@@ -10,6 +11,8 @@ Vue.use(Vuex);
 export default new Vuex.Store<RootState>({
   state: {
     sets: [],
+    standardSets: [],
+    expandedSets: [],
     supertypes: [
       'Pokémon',
       'Trainer',
@@ -58,6 +61,12 @@ export default new Vuex.Store<RootState>({
   mutations: {
     [ROOT.SETS]: (state, sets: PokemonTCG.Set[]) => {
       state.sets = sets;
+      state.sets.sort((a: PokemonTCG.Set, b: PokemonTCG.Set) => {
+        return moment.utc(b.releaseDate).diff(moment.utc(a.releaseDate));
+      });
+
+      state.standardSets = state.sets.filter((set) => set.standardLegal);
+      state.expandedSets = state.sets.filter((set) => set.expandedLegal);
     },
   },
   actions: {
