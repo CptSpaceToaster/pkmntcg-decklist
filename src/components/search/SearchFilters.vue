@@ -20,7 +20,7 @@ import { SEARCH } from '@/store/actions';
 })
 export default class SearchFilters extends Vue {
   public dispatchSearch = debounce(() => {
-    this.$store.dispatch(SEARCH.CARD);
+    this.$store.dispatch(SEARCH.REQUEST);
   }, globals.debounceInterval);
   public searchCards(event: any) {
     if (event.target.value) {

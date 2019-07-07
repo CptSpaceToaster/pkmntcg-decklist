@@ -18,7 +18,7 @@ export const module: Module<SearchState, RootState> = {
     },
   },
   mutations: {
-    [SEARCH.REQUEST]: (state) => {
+    [SEARCH.LOAD]: (state) => {
       state.status = NavigationStatus.LOADING;
     },
 
@@ -36,18 +36,17 @@ export const module: Module<SearchState, RootState> = {
     },
   },
   actions: {
-    [SEARCH.CARD]: ({ commit, getters }) => {
-      commit(SEARCH.REQUEST);
+    [SEARCH.REQUEST]: ({ commit, getters }) => {
+      commit(SEARCH.LOAD);
 
-      const querry = getters.searchQuery;
+      const query = getters.searchQuery;
 
-      PokemonTCG.Card.where(querry)
+      PokemonTCG.Card.where(query)
         .then((cards) => {
           commit(SEARCH.SUCCESS, cards);
         })
         .catch((error) => {
           commit(SEARCH.FAILURE);
-          console.error('Search failure: ', error);
         });
     },
   },

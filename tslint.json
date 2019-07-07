@@ -14,7 +14,6 @@
     "interface-name": false,
     "ordered-imports": false,
     "object-literal-sort-keys": false,
-    "no-console": false,
     "no-empty-interface": false,
     "no-shadowed-variable": false,
     "max-line-length": [ 160 ]

@@ -39,7 +39,7 @@ export class Decklist {
     }
   }
 
-  public findMatchingBundle(id: number): CardBundle|null {
+  public findMatchingBundle(id: string): CardBundle|null {
     for (const bundle of this.bundles) {
       if (bundle.card.id === id) {
         return bundle;
@@ -58,8 +58,7 @@ export class Decklist {
     return count;
   }
 
-  public cardLimit(card: any): number {
-    console.log(card);
+  public cardLimit(card: PokemonTCG.Card): number {
     if (card.supertype === 'Energy' && card.subtype === 'Basic') {
       return 59;
     }

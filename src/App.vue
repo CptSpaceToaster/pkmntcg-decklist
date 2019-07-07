@@ -10,6 +10,7 @@ import Vue from 'vue';
 import NavigationHeader from '@/components/navigation/NavigationHeader.vue';
 import NavigationFooter from '@/components/navigation/NavigationFooter.vue';
 import { Component } from 'vue-property-decorator';
+import { ROOT } from '@/store/actions.ts';
 
 @Component({
   components: {
@@ -17,6 +18,12 @@ import { Component } from 'vue-property-decorator';
   },
 })
 export default class App extends Vue {
+  private mounted() {
+    this.$store.dispatch(ROOT.INITIALIZE_SETS);
+    this.$store.dispatch(ROOT.INITIALIZE_TYPES);
+    this.$store.dispatch(ROOT.INITIALIZE_SUBTYPES);
+    this.$store.dispatch(ROOT.INITIALIZE_SUPERTYPES);
+  }
 }
 </script>
 

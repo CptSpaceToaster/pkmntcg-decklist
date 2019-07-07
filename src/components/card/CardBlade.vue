@@ -6,10 +6,10 @@
     </div>
     <div class="controls">
       <button class="transparent-light" @click="addCard()">
-        <svgicon id="chevron" name="chevron" :original="true" />
+        <svgicon id="plus" name="plus" :original="true" />
       </button>
       <button class="transparent-light" @click="removeCard()">
-        <svgicon id="chevron" name="chevron" :original="true" />
+        <svgicon id="minus" name="minus" :original="true" />
       </button>
     </div>
   </div>
@@ -29,7 +29,7 @@ import { CardBundle } from '@/types/decklist';
 export default class Card extends Vue {
   @Prop() public bundle!: CardBundle;
 
-  get card(): any {
+  get card(): PokemonTCG.Card {
     return this.bundle.card;
   }
 

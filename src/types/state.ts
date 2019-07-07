@@ -3,7 +3,12 @@ import { NavigationStatus } from '@/types/network';
 import { PokemonTCG } from 'pokemon-tcg-sdk-typescript';
 
 // Root state specific
-export interface RootState {}
+export interface RootState {
+  sets: PokemonTCG.Set[];
+  types: string[];
+  subtypes: string[];
+  supertypes: string[];
+}
 
 export interface DecklistState {
   decklist: Decklist;
