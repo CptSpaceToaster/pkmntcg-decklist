@@ -1,6 +1,10 @@
 <template>
   <div class="card" @click="$emit('cardClicked')">
-    <img :src="card.imageUrlHiRes"/>
+    <picture>
+      <source media="(min-width: 550px)" :srcset="card.imageUrl">
+      <img :src="card.imageUrlHiRes">
+    </picture>
+
     <div class="card-name">{{card.name}}</div>
     <div class="card-code subhead">{{cardCode}}</div>
   </div>

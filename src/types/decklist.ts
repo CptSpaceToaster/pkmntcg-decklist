@@ -1,6 +1,7 @@
 import { PokemonTCG } from 'pokemon-tcg-sdk-typescript';
 
 export class Decklist {
+  public title: string = '';
   public count: number = 0;
   public bundles: CardBundle[] = [];
 
