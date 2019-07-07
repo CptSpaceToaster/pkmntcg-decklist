@@ -17,7 +17,9 @@ export const module: Module<SearchState, RootState> = {
   getters: {
     searchQuery: (state) => {
       const query: PokemonTCG.IQuery[] = [];
-      query.push({ name: 'name', value: state.name });
+      if (!!state.name && state.name.length > 0) {
+        query.push({ name: 'name', value: state.name });
+      }
       if (!!state.sets && state.sets.length > 0) {
         query.push({ name: 'setCode', value: state.sets.map((set) => set.code).join('|')});
       }

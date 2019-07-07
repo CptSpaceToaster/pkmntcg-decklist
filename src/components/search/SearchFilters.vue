@@ -4,16 +4,25 @@
       <label>Search</label>
       <input @input="searchCards" class="search-input"/>
       <multiselect
-        placeholder="Supertypes"
+        placeholder="Sets"
+        v-model="filterSets"
+        label="name"
+        track-by="code"
+        :multiple="true"
+        :options="availableSets"
+        :close-on-select="false"/>
+      <multiselect
+        placeholder="Card Type"
         v-model="filterSupertypes"
         :options="availableSupertypes"/>
       <multiselect
         placeholder="Subtypes"
         v-model="filterSubtypes"
+        :multiple="true"
         :options="availableSubtypes"
-        :multiple="true"/>
+        :close-on-select="false"/>
       <multiselect
-        placeholder="Types"
+        placeholder="Pokemon Types"
         v-model="filterTypes"
         :options="availableTypes"
         :multiple="true"
@@ -37,20 +46,26 @@ import { PokemonTCG } from 'pokemon-tcg-sdk-typescript';
   },
 })
 export default class SearchFilters extends Vue {
-  public sets: PokemonTCG.Set[] = [];
-  public types: string[] = [];
-  public subtypes: string[] = [];
-  public supertypes: string[] = [];
 
   get availableSets(): PokemonTCG.Set[] {
     return this.$store.state.sets;
+  }
+  get filterSets(): PokemonTCG.Set[] {
+    return this.$store.state.search.sets;
+  }
+  set filterSets(sets: PokemonTCG.Set[]) {
+    this.$store.commit(SEARCH.SETS, sets);
+    this.dispatchSearch();
   }
 
   get availableSupertypes(): string[] {
     return this.$store.state.supertypes;
   }
   get filterSupertypes(): string {
-    return this.$store.state.search.supertypes[0];
+    if (!!this.$store.state.search.supertypes && this.$store.state.search.supertypes.length > 0) {
+      return this.$store.state.search.supertypes[0];
+    }
+    return '';
   }
   set filterSupertypes(supertypes: string) {
     this.$store.commit(SEARCH.SUPERTYPES, [supertypes]);
@@ -107,10 +122,8 @@ export default class SearchFilters extends Vue {
   }, globals.debounceInterval);
 
   public searchCards(event: any) {
-    if (event.target.value) {
-      this.$store.commit(SEARCH.NAME, event.target.value);
-      this.dispatchSearch();
-    }
+    this.$store.commit(SEARCH.NAME, event.target.value);
+    this.dispatchSearch();
   }
 }
 </script>

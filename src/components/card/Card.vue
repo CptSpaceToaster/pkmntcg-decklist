@@ -19,7 +19,9 @@ export default class Card extends Vue {
   @Prop() public card!: PokemonTCG.Card;
 
   get cardCode(): string {
-    return `${this.card.setCode} ${this.card.number}`;
+    const set = this.$store.state.sets
+      .filter((set: PokemonTCG.Set) => set.code === this.card.setCode)[0];
+    return `${set.name} ${this.card.number}/${set.totalCards}`;
   }
 
   get tooltipContent(): string {
