@@ -8,7 +8,7 @@ export class Decklist {
     if (this.count >= 60) {
       return false;
     }
-    if (this.countMatchingNames(card.name) === this.cardLimit(card)) {
+    if (this.countMatchingNames(card.name) >= this.cardLimit(card)) {
       return false;
     }
 
@@ -65,10 +65,22 @@ export class Decklist {
     if (card.name.endsWith('◇')) {
       return 1;
     }
+    if (this.isStarCard(card)) {
+      for (const bundle of this.bundles) {
+        if (this.isStarCard(bundle.card)) {
+          return 0;
+        }
+      }
+      return 1;
+    }
     if (card.rarity.includes('ACE')) {
       return 1;
     }
     return 4;
+  }
+
+  public isStarCard(card: PokemonTCG.Card): boolean {
+    return (card.name.endsWith(' Star') || card.name.endsWith(' Star δ'));
   }
 }
 
