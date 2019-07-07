@@ -4,6 +4,15 @@ import { RootState, SearchState } from '@/types/state';
 import { SEARCH } from '@/store/actions';
 import { NavigationStatus } from '@/types/network';
 
+const nHack: string[] =  [
+  'bw3-92',
+  'bw3-101',
+  'xy10-105a',
+  'bw5-96',
+  'xy10-105',
+  'bwp-BW100',
+];
+
 export const module: Module<SearchState, RootState> = {
   state: {
     status: NavigationStatus.NONE,
@@ -18,7 +27,12 @@ export const module: Module<SearchState, RootState> = {
     searchQuery: (state) => {
       const query: PokemonTCG.IQuery[] = [];
       if (!!state.name && state.name.length > 0) {
-        query.push({ name: 'name', value: state.name });
+        if (state.name === 'N') {
+          // Yep >.>
+          query.push({ name: 'id', value: nHack.join('|') });
+        } else {
+          query.push({ name: 'name', value: state.name });
+        }
       }
       if (!!state.sets && state.sets.length > 0) {
         query.push({ name: 'setCode', value: state.sets.map((set) => set.code).join('|')});
