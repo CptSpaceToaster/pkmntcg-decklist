@@ -1,6 +1,6 @@
 <template>
   <div class="card" @click="$emit('cardClicked')">
-    <img :src="card.imageUrl"/>
+    <img :src="card.imageUrlHiRes"/>
     <div class="card-name">{{card.name}}</div>
     <div class="card-code subhead">{{cardCode}}</div>
   </div>
@@ -44,7 +44,7 @@ export default class Card extends Vue {
     border-radius: 12px;
   }
 
-  @media (max-width: 560px) {
+  @media (max-width: 550px) {
     width: 100%;
     img {
       width: 100%;

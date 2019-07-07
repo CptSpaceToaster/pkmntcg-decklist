@@ -91,7 +91,9 @@ export default class Card extends Vue {
 }
 
 .controls {
+  flex: 1 1 auto;
   display: flex;
+  justify-content: flex-end;
   align-items: center;
   > :last-child {
     transform: rotate(180deg)

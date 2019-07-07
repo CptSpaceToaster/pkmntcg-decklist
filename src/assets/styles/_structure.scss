@@ -2,7 +2,7 @@
 $roboto-regular: 400;
 $roboto-bold: 700;
 $default--transition-duration: 0.3s;
-$default--min-clickable-height: 44px;
+$default--min-clickable-height: 40px;
 
 @mixin row($spacing: 5px, $justify: flex-start, $align: center) {
   display: flex;

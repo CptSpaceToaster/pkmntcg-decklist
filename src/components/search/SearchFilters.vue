@@ -1,34 +1,46 @@
 <template>
   <div class="search-bar">
-    <span class="search-filters">
-      <label>Search</label>
-      <input @input="searchCards" class="search-input"/>
-      <multiselect
-        :class="{'sets': true, 'empty': filterSets.length === 0}"
-        v-model="filterSets"
-        label="name"
-        track-by="code"
-        :placeholder="placeholderSets"
-        :multiple="true"
-        :options="availableSets"
-        :close-on-select="false"/>
-      <multiselect
-        placeholder="Card Type"
-        v-model="filterSupertypes"
-        :options="availableSupertypes"/>
-      <multiselect
-        placeholder="Subtypes"
-        v-model="filterSubtypes"
-        :multiple="true"
-        :options="availableSubtypes"
-        :close-on-select="false"/>
-      <multiselect
-        placeholder="Pokemon Types"
-        v-model="filterTypes"
-        :options="availableTypes"
-        :multiple="true"
-        :disabled="disableTypes"/>
-    </span>
+    <div class="search-filters">
+      <div class='heirloom-filters'>
+        <span>
+          <input @input="searchCards" class="search-input" placeholder="Search"/>
+          <button class="transparent-light" @click="filtersCollapsed = !filtersCollapsed">
+            <svgicon id="chevron" name="chevron" :original="true" :class="{'collapsed': filtersCollapsed}"/>
+          </button>
+        </span>
+      </div>
+      <div :class="{'extra-filters': true, 'collapsed': filtersCollapsed}">
+        <multiselect
+          :class="{'sets': true, 'empty': filterSets.length === 0}"
+          v-model="filterSets"
+          label="name"
+          track-by="code"
+          :placeholder="placeholderSets"
+          :multiple="true"
+          :show-labels="false"
+          :options="availableSets"
+          :close-on-select="false"/>
+        <multiselect
+          placeholder="Card Type"
+          v-model="filterSupertypes"
+          :show-labels="false"
+          :options="availableSupertypes"/>
+        <multiselect
+          placeholder="Subtypes"
+          v-model="filterSubtypes"
+          :multiple="true"
+          :show-labels="false"
+          :options="availableSubtypes"
+          :close-on-select="false"/>
+        <multiselect
+          placeholder="Types"
+          v-model="filterTypes"
+          :show-labels="false"
+          :options="availableTypes"
+          :multiple="true"
+          :disabled="disableTypes"/>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -47,7 +59,6 @@ import { PokemonTCG } from 'pokemon-tcg-sdk-typescript';
   },
 })
 export default class SearchFilters extends Vue {
-
   get availableSets(): PokemonTCG.Set[] {
     return [{
         code: '',
@@ -184,6 +195,8 @@ export default class SearchFilters extends Vue {
     this.$store.dispatch(SEARCH.REQUEST);
   }, globals.debounceInterval);
 
+  private filtersCollapsed = !(window.innerWidth > 550);
+
   public searchCards(event: any) {
     this.$store.commit(SEARCH.NAME, event.target.value);
     this.dispatchSearch();
@@ -197,20 +210,56 @@ export default class SearchFilters extends Vue {
 
 .search-bar {
   @include row($align: stretch);
-  background: $secondary;
+  background-color: $secondary;
 }
 
 .search-filters {
-  margin: 20px;
+  margin: 7px;
   flex: 1 1 auto;
+  @include stack($spacing: 0);
+}
+
+.heirloom-filters {
+  z-index: 100;
+  background-color: $secondary;
+  span {
+    @include row($spacing: 5px);
+    input {
+      flex: 1 1 auto;
+    }
+    .svg-icon {
+      transition: transform $default--transition-duration ease;
+      &.collapsed {
+        transform: rotate(-180deg);
+      }
+    }
+  }
+}
+
+.extra-filters {
+  z-index: 50;
   @include row($spacing: 5px);
+
+  @media (max-width: 550px) {
+    @include stack($spacing: 0);
+  }
+
+  .multiselect {
+    margin-top: 5px;
+    transition: margin-top $default--transition-duration ease;
+  }
+
+  &.collapsed {
+    .multiselect {
+      margin-top: -40px;
+    }
+  }
 }
 
 input {
   padding: 10px;
   border: 1px solid $border-color;
 }
-
 
 .sets {
   .multiselect__tags {

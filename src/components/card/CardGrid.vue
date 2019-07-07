@@ -1,5 +1,5 @@
 <template>
-  <div class="card-grid">
+  <div class="card-grid" :class="{'loading': loading}">
     <Card v-for="card in cards" :key="card.id" :card="card" @cardClicked="cardClicked(card)"/>
   </div>
 </template>
@@ -10,6 +10,7 @@ import Card from '@/components/card/Card.vue';
 import { Component } from 'vue-property-decorator';
 import { PokemonTCG } from 'pokemon-tcg-sdk-typescript';
 import { DECKLIST } from '@/store/actions';
+import { NavigationStatus } from '@/types/network';
 
 @Component({
   components: {
@@ -17,6 +18,10 @@ import { DECKLIST } from '@/store/actions';
   },
 })
 export default class CardGrid extends Vue {
+  get loading(): boolean {
+    return this.$store.state.search.status === NavigationStatus.LOADING;
+  }
+
   get cards(): PokemonTCG.Card[] {
     return this.$store.state.search.searchedCards;
   }
@@ -37,12 +42,10 @@ export default class CardGrid extends Vue {
   justify-content: center;
   flex-wrap: wrap;
   padding: 20px;
-}
+  transition: opacity $default--transition-duration ease;
 
-.boxxy {
-  width: 240px;
-  height: 360px;
-  background-color: lightpink;
-  margin: 10px;
+  &.loading {
+    opacity: 0.6;
+  }
 }
 </style>

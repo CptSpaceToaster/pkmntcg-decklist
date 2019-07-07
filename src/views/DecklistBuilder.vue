@@ -25,7 +25,7 @@ import { Decklist } from '@/types/decklist';
   },
 })
 export default class DecklistBuilder extends Vue {
-  private isCardStackShown = window.innerWidth > 600;
+  private isCardStackShown = window.innerWidth > 550;
 
   get decklist(): Decklist {
     return this.$store.state.decklist.decklist;
@@ -45,7 +45,6 @@ export default class DecklistBuilder extends Vue {
 @import "@style/_colors.scss";
 
 $card-stack-width: 300px;
-$search-height: 70px;
 
 #search-bar-container {
   position: sticky;

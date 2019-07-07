@@ -37,6 +37,10 @@ export default class CardStackHeader extends Vue {
   > * {
     margin-left: 10px;
   }
+
+  input {
+    flex: 1 1 auto;
+  }
 }
 
 .title {
