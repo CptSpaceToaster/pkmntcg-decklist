@@ -20,9 +20,6 @@ import { ROOT } from '@/store/actions.ts';
 export default class App extends Vue {
   private mounted() {
     this.$store.dispatch(ROOT.INITIALIZE_SETS);
-    this.$store.dispatch(ROOT.INITIALIZE_TYPES);
-    this.$store.dispatch(ROOT.INITIALIZE_SUBTYPES);
-    this.$store.dispatch(ROOT.INITIALIZE_SUPERTYPES);
   }
 }
 </script>

@@ -5,9 +5,11 @@ import { PokemonTCG } from 'pokemon-tcg-sdk-typescript';
 // Root state specific
 export interface RootState {
   sets: PokemonTCG.Set[];
-  types: string[];
-  subtypes: string[];
   supertypes: string[];
+  pokemonSubtypes: string[];
+  trainerSubtypes: string[];
+  energySubtypes: string[];
+  types: string[];
 }
 
 export interface DecklistState {
@@ -18,4 +20,8 @@ export interface SearchState {
   status: NavigationStatus;
   searchedCards: PokemonTCG.Card[];
   name: string;
+  sets: PokemonTCG.Set[];
+  supertypes: string[];
+  subtypes: string[];
+  types: string[];
 }

@@ -10,26 +10,54 @@ Vue.use(Vuex);
 export default new Vuex.Store<RootState>({
   state: {
     sets: [],
-    types: [],
-    subtypes: [],
-    supertypes: [],
+    supertypes: [
+      'Pokémon',
+      'Trainer',
+      'Energy',
+    ],
+    pokemonSubtypes: [
+      'Basic',
+      'Stage 1',
+      'Stage 2',
+      'Restored',
+      'TAG TEAM',
+      'GX',
+      'EX',
+      'MEGA',
+      'BREAK',
+      'Level Up',
+      'LEGEND',
+    ],
+    trainerSubtypes: [
+      'Item',
+      'Supporter',
+      'Stadium',
+      'Pokémon Tool',
+      'Technical Machine',
+      'Rocket\'s Secret Machine',
+    ],
+    energySubtypes: [
+      'Basic', // (again!)
+      'Special',
+    ],
+    types: [
+      'Fighting',
+      'Grass',
+      'Fire',
+      'Psychic',
+      'Lightning',
+      'Darkness',
+      'Water',
+      'Fairy',
+      'Metal',
+      'Dragon',
+      'Colorless',
+    ],
   },
   getters: {},
   mutations: {
     [ROOT.SETS]: (state, sets: PokemonTCG.Set[]) => {
       state.sets = sets;
-    },
-
-    [ROOT.TYPES]: (state, types: string[]) => {
-      state.types = types;
-    },
-
-    [ROOT.SUBTYPES]: (state, subtypes: string[]) => {
-      state.subtypes = subtypes;
-    },
-
-    [ROOT.SUPERTYPES]: (state, supertypes: string[]) => {
-      state.supertypes = supertypes;
     },
   },
   actions: {
@@ -41,42 +69,6 @@ export default new Vuex.Store<RootState>({
         .catch((error) => {
           if (!!error.response && error.response.status >= 500 && error.response.status < 600) {
             setTimeout(() => { dispatch(ROOT.INITIALIZE_SETS); }, 5000);
-          }
-        });
-    },
-
-    [ROOT.INITIALIZE_TYPES]: ({ commit, dispatch }) => {
-      PokemonTCG.Meta.allTypes()
-        .then((types) => {
-          commit(ROOT.TYPES, types);
-        })
-        .catch((error) => {
-          if (!!error.response && error.response.status >= 500 && error.response.status < 600) {
-            setTimeout(() => { dispatch(ROOT.INITIALIZE_TYPES); }, 5000);
-          }
-        });
-    },
-
-    [ROOT.INITIALIZE_SUBTYPES]: ({ commit, dispatch }) => {
-      PokemonTCG.Meta.allSubtypes()
-        .then((subtypes) => {
-          commit(ROOT.SUBTYPES, subtypes);
-        })
-        .catch((error) => {
-          if (!!error.response && error.response.status >= 500 && error.response.status < 600) {
-            setTimeout(() => { dispatch(ROOT.INITIALIZE_SUBTYPES); }, 5000);
-          }
-        });
-    },
-
-    [ROOT.INITIALIZE_SUPERTYPES]: ({ commit, dispatch }) => {
-      PokemonTCG.Meta.allSupertypes()
-        .then((supertypes) => {
-          commit(ROOT.SUPERTYPES, supertypes);
-        })
-        .catch((error) => {
-          if (!!error.response && error.response.status >= 500 && error.response.status < 600) {
-            setTimeout(() => { dispatch(ROOT.INITIALIZE_SUPERTYPES); }, 5000);
           }
         });
     },
