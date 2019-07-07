@@ -10,7 +10,7 @@ import Vue from 'vue';
 import NavigationHeader from '@/components/navigation/NavigationHeader.vue';
 import NavigationFooter from '@/components/navigation/NavigationFooter.vue';
 import { Component } from 'vue-property-decorator';
-import { ROOT } from '@/store/actions.ts';
+import { ROOT, SEARCH } from '@/store/actions.ts';
 
 @Component({
   components: {
@@ -20,6 +20,7 @@ import { ROOT } from '@/store/actions.ts';
 export default class App extends Vue {
   private mounted() {
     this.$store.dispatch(ROOT.INITIALIZE_SETS);
+    this.$store.dispatch(SEARCH.REQUEST);
   }
 }
 </script>
