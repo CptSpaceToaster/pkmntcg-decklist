@@ -1,10 +1,12 @@
 <template>
   <div class="card" @click="$emit('cardClicked')">
-    <picture>
-      <source media="(min-width: 550px)" :srcset="card.imageUrl">
-      <img :src="card.imageUrlHiRes">
-    </picture>
-
+    <v-popover trigger="hover">
+      <picture>
+        <source media="(min-width: 550px)" :srcset="card.imageUrl">
+        <img :src="card.imageUrlHiRes">
+      </picture>
+      <CardInfo :card="card" slot="popover"/>
+    </v-popover>
     <div class="card-name">{{card.name}}</div>
     <div class="card-code subhead">{{cardCode}}</div>
   </div>
@@ -12,11 +14,13 @@
 
 <script lang="ts">
 import Vue from 'vue';
+import CardInfo from '@/components/card/CardInfo.vue';
 import { Component, Prop } from 'vue-property-decorator';
 import { PokemonTCG } from 'pokemon-tcg-sdk-typescript';
 
 @Component({
   components: {
+    CardInfo,
   },
 })
 export default class Card extends Vue {
@@ -25,7 +29,11 @@ export default class Card extends Vue {
   get cardCode(): string {
     const set = this.$store.state.sets
       .filter((set: PokemonTCG.Set) => set.code === this.card.setCode)[0];
-    return `${set.name} ${this.card.number}/${set.totalCards}`;
+    if (!!set) {
+      return `${set.name} ${this.card.number}/${set.totalCards}`;
+    } else {
+      return `${this.card.number}`;
+    }
   }
 
   get tooltipContent(): string {

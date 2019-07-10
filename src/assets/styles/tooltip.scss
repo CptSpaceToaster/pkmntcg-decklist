@@ -1,5 +1,5 @@
-$tooltip-foreground-color: black;
-$tooltip-background-color: white;
+$tooltip-foreground-color: #fafafa;
+$tooltip-background-color: black;
 
 .tooltip {
   display: block !important;
@@ -8,6 +8,7 @@ $tooltip-background-color: white;
   .tooltip-inner {
     background-color: $tooltip-background-color;
     color: $tooltip-foreground-color;
+    padding: 10px;
   }
 
   .tooltip-arrow {
@@ -89,6 +90,6 @@ $tooltip-background-color: white;
   &[aria-hidden='false'] {
     visibility: visible;
     opacity: 1;
-    transition: opacity .15s;
+    transition: opacity $default--transition-duration ease-in;
   }
 }
