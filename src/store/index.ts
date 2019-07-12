@@ -10,6 +10,7 @@ Vue.use(Vuex);
 
 export default new Vuex.Store<RootState>({
   state: {
+    windowWidth: window.innerWidth,
     sets: [],
     standardSets: [],
     expandedSets: [],
@@ -59,6 +60,9 @@ export default new Vuex.Store<RootState>({
   },
   getters: {},
   mutations: {
+    [ROOT.WINDOW_WIDTH]: (state, windowWidth: number) => {
+      state.windowWidth = windowWidth;
+    },
     [ROOT.SETS]: (state, sets: PokemonTCG.Set[]) => {
       state.sets = sets;
       state.sets.sort((a: PokemonTCG.Set, b: PokemonTCG.Set) => {

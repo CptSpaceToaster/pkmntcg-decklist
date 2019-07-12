@@ -1,6 +1,6 @@
 <template>
   <div class="card" @click="$emit('cardClicked')">
-    <v-popover trigger="hover">
+    <v-popover trigger="hover" :disabled="!isCardInfoVisible">
       <picture>
         <source media="(min-width: 550px)" :srcset="card.imageUrl">
         <img :src="card.imageUrlHiRes">
@@ -25,6 +25,10 @@ import { PokemonTCG } from 'pokemon-tcg-sdk-typescript';
 })
 export default class Card extends Vue {
   @Prop() public card!: PokemonTCG.Card;
+
+  get isCardInfoVisible(): boolean {
+    return this.$store.state.windowWidth > 550;
+  }
 
   get cardCode(): string {
     const set = this.$store.state.sets

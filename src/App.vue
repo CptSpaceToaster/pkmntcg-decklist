@@ -19,8 +19,19 @@ import { ROOT, SEARCH } from '@/store/actions.ts';
 })
 export default class App extends Vue {
   private mounted() {
+    // hacky responsiveness
+    window.addEventListener('resize', this.handleResize);
+
     this.$store.dispatch(ROOT.INITIALIZE_SETS);
     this.$store.dispatch(SEARCH.REQUEST);
+  }
+
+  private destroyed() {
+    window.removeEventListener('resize', this.handleResize);
+  }
+
+  private handleResize(event: Event) {
+    this.$store.commit(ROOT.WINDOW_WIDTH, window.innerWidth);
   }
 }
 </script>
