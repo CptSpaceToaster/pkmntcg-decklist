@@ -1,6 +1,6 @@
 <template>
   <div class="card" @click="$emit('cardClicked')">
-    <v-popover trigger="hover" :disabled="!isCardInfoVisible">
+    <v-popover trigger="hover" :disabled="!isCardInfoVisible" placement='right-start' :delay="{show: 300, hide: 0}">
       <picture>
         <source media="(min-width: 550px)" :srcset="card.imageUrl">
         <img :src="card.imageUrlHiRes">

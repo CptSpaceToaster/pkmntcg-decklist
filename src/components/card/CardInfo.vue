@@ -83,7 +83,7 @@ export default class CardInfo extends Vue {
 @import "@style/_colors.scss";
 
 .card-info {
-  width: 600px;
+  max-width: 500px;
   h2 {
     margin-top: 0px;
   }

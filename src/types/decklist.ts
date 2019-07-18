@@ -1,9 +1,53 @@
+import store from '@/store';
 import { PokemonTCG } from 'pokemon-tcg-sdk-typescript';
 
 export class Decklist {
   public title: string = '';
-  public count: number = 0;
-  public bundles: CardBundle[] = [];
+  public pokemonBundles: CardBundle[] = [];
+  public trainerBundles: CardBundle[] = [];
+  public energyBundles: CardBundle[] = [];
+
+  get bundles(): CardBundle[] {
+    return ([] as CardBundle[]).concat(this.pokemonBundles, this.trainerBundles, this.energyBundles);
+  }
+  get pokemonCount(): number {
+    return this.pokemonBundles
+      .map((bundle) => bundle.count)
+      .reduce((total, count) => total + count, 0);
+  }
+  get trainerCount(): number {
+    return this.trainerBundles
+      .map((bundle) => bundle.count)
+      .reduce((total, count) => total + count, 0);
+  }
+  get energyCount(): number {
+    return this.energyBundles
+      .map((bundle) => bundle.count)
+      .reduce((total, count) => total + count, 0);
+  }
+  get count(): number {
+    return this.pokemonCount + this.trainerCount + this.energyCount;
+  }
+  public toString(): string {
+    let res = `****** Pokémon Trading Card Game Deck List ******\n\n##Pokémon - ${this.pokemonCount}\n`;
+    for (const bundle of this.pokemonBundles) {
+      res += `\n* ${bundle.count} ${bundle.card.name} ${this.getPTCGOCode(bundle.card)} ${bundle.card.number}`;
+    }
+    res += `\n\n##Trainer Cards - ${this.trainerCount}\n`;
+    for (const bundle of this.trainerBundles) {
+      res += `\n* ${bundle.count} ${bundle.card.name} ${this.getPTCGOCode(bundle.card)} ${bundle.card.number}`;
+    }
+    res += `\n\n##Energy - ${this.energyCount}\n`;
+    for (const bundle of this.energyBundles) {
+      if (bundle.card.subtype === 'Basic') {
+        res += `\n* ${bundle.count} ${bundle.card.name} ${this.getEnergyID(bundle.card)}`;
+      } else {
+        res += `\n* ${bundle.count} ${bundle.card.name} ${this.getPTCGOCode(bundle.card)} ${bundle.card.number}`;
+      }
+    }
+    res += `\n\nTotal Cards - ${this.count}\n\n****** Deck List Generated at ${window.location.host + window.location.pathname + window.location.hash} ******`;
+    return res;
+  }
 
   public addCard(card: PokemonTCG.Card): boolean {
     if (this.count >= 60) {
@@ -14,12 +58,20 @@ export class Decklist {
     }
 
     const bundle = this.findMatchingBundle(card.id);
-    this.count++;
     if (bundle) {
       bundle.count++;
       return true;
     } else {
-      this.bundles.push({ card, count: 1 });
+      switch (card.supertype) {
+        case 'Trainer':
+          this.trainerBundles.push({ card, count: 1 });
+          break;
+        case 'Energy':
+          this.energyBundles.push({ card, count: 1 });
+          break;
+        default:
+          this.pokemonBundles.push({ card, count: 1 });
+      }
       return true;
     }
   }
@@ -27,12 +79,21 @@ export class Decklist {
   public removeCard(card: PokemonTCG.Card): boolean {
     const bundle = this.findMatchingBundle(card.id);
     if (bundle) {
-      this.count--;
       if (bundle.count > 1) {
         bundle.count--;
         return true;
       } else {
         this.bundles.splice(this.bundles.indexOf(bundle), 1);
+        switch (card.supertype) {
+          case 'Trainer':
+            this.trainerBundles.splice(this.trainerBundles.indexOf(bundle), 1);
+            break;
+          case 'Energy':
+            this.energyBundles.splice(this.energyBundles.indexOf(bundle), 1);
+            break;
+          default:
+            this.pokemonBundles.splice(this.pokemonBundles.indexOf(bundle), 1);
+        }
         return true;
       }
     } else {
@@ -67,7 +128,7 @@ export class Decklist {
       return 1;
     }
     if (this.isStarCard(card)) {
-      for (const bundle of this.bundles) {
+      for (const bundle of this.pokemonBundles) {
         if (this.isStarCard(bundle.card)) {
           return 0;
         }
@@ -75,6 +136,11 @@ export class Decklist {
       return 1;
     }
     if (card.rarity.includes('ACE')) {
+      for (const bundle of this.trainerBundles) {
+        if (bundle.card.rarity.includes('ACE')) {
+          return 0;
+        }
+      }
       return 1;
     }
     return 4;
@@ -82,6 +148,40 @@ export class Decklist {
 
   public isStarCard(card: PokemonTCG.Card): boolean {
     return (card.name.endsWith(' Star') || card.name.endsWith(' Star δ'));
+  }
+
+  public getPTCGOCode(card: PokemonTCG.Card): string {
+    for (const set of store.state.sets) {
+      if (card.setCode === set.code) {
+        return set.ptcgoCode;
+      }
+    }
+    return '';
+  }
+
+  public getEnergyID(card: PokemonTCG.Card): number {
+    // PTCGO actually cares about these ID's and not the card names
+    const nrg = card.name;
+    let energyID = 1;
+    const energyTypes = [
+      'Grass',
+      'Fire',
+      'Water',
+      'Lightning',
+      'Psychic',
+      'Fighting',
+      'Darkness',
+      'Metal',
+      'Fairy',
+    ];
+
+    for (const energy of energyTypes) {
+      if (nrg.includes(energy)) {
+        return energyID;
+      }
+      energyID++;
+    }
+    return 0;
   }
 }
 

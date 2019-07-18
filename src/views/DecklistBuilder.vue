@@ -32,9 +32,6 @@ export default class DecklistBuilder extends Vue {
   }
 
   private toggleList() {
-    if (this.decklist.count === 0) {
-      return;
-    }
     this.isCardStackShown = !this.isCardStackShown;
   }
 }
@@ -63,7 +60,6 @@ $card-stack-width: 300px;
   bottom: -100%;
   border-top-left-radius: 12px;
   border-top-right-radius: 12px;
-  background-color: $secondary;
   border: 1px solid $border-color;
   overflow-y: auto;
   transition: all $default--transition-duration ease;
@@ -80,7 +76,6 @@ $card-stack-width: 300px;
   bottom: 0;
   border-top-left-radius: 12px;
   border-top-right-radius: 12px;
-  background-color: $secondary;
   border: 1px solid $border-color;
 }
 </style>

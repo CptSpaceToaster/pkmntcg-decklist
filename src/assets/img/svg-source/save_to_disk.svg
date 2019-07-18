@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="20px" height="20px" viewBox="0 0 20 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 55.2 (78181) - https://sketchapp.com -->
+    <title>save_to_disk</title>
+    <desc>Created with Sketch.</desc>
+    <g id="save_to_disk" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Group" transform="translate(3.500000, 2.500000)" stroke="#212121">
+            <polyline id="Disk" fill-opacity="0.5" fill="#212121" stroke-linecap="round" stroke-linejoin="round" points="2 1 2 6 11 6 11 1 13 1 13 14 11 14 11 10 4 10 4 14 3 14 0 11 0 1 2 1"></polyline>
+            <path d="M5.5,12.5 L5.5,11.5" id="Line" stroke-linecap="square"></path>
+            <path d="M4,14 L11,14" id="Line" stroke-linecap="square"></path>
+            <path d="M2,1 L11,1" id="Line" stroke-linecap="square"></path>
+        </g>
+        <polyline id="Arrow" stroke="#212121" fill="#C1CFF6" stroke-linecap="round" stroke-linejoin="round" points="17 10.5 13 10.5 13 14.5 11 14.5 15 18.5 19 14.5 17 14.5 17 10.5"></polyline>
+    </g>
+</svg>

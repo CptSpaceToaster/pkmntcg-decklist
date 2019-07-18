@@ -33,6 +33,7 @@ export default class CardStackHeader extends Vue {
   flex-direction: row;
   align-items: center;
   font-size: 20px;
+  background-color: $secondary;
 
   > * {
     margin-left: 10px;

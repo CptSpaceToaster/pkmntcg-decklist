@@ -1,8 +1,8 @@
 <template>
   <div class="card-blade">
     <div class="crop" :style="cropStyle">
-      <span class="card-blade-text">{{bundle.count}}</span>
-      <span class="card-blade-text">{{card.name}}</span>
+      <span class="outline">{{bundle.count}}</span>
+      <span class="outline">{{card.name}}</span>
     </div>
     <div class="controls">
       <button class="transparent-light" @click="addCard()">
@@ -81,13 +81,11 @@ export default class Card extends Vue {
   width: 200px;
   display: flex;
   align-items: center;
-}
 
-.card-blade-text {
-  font-size: 20px;
-  color: $text-color-inverted;
-  text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
-  margin-left: 10px;
+  .outline {
+    margin-left: 10px;
+    font-size: 20px;
+  }
 }
 
 .controls {

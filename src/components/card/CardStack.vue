@@ -1,9 +1,23 @@
 <template>
   <div class="card-stack">
     <CardStackHeader @toggleDecklist="$emit('toggleDecklist')"/>
-    <div v-for="bundle in this.bundles" :key="bundle.card.id">
-      <CardBlade :bundle="bundle"/>
+    <span class="header-info">
+      <span class="outline">Pokemon<br/>{{decklist.pokemonCount}}</span>
+      <span class="outline">Trainers<br/>{{decklist.trainerCount}}</span>
+      <span class="outline">Energy<br/>{{decklist.energyCount}}</span>
+    </span>
+    <div class="bundle">
+      <CardBlade v-for="bundle in decklist.pokemonBundles" :key="bundle.card.id" :bundle="bundle"/>
     </div>
+    <div class="bundle">
+      <CardBlade v-for="bundle in decklist.trainerBundles" :key="bundle.card.id" :bundle="bundle"/>
+    </div>
+    <div class="bundle">
+      <CardBlade v-for="bundle in decklist.energyBundles" :key="bundle.card.id" :bundle="bundle"/>
+    </div>
+    <CardStackFooter @copyToClipboard="copyToClipboard"/>
+    <!-- Hacks -->
+    <textarea id='decklistText' style="position: absolute; left: -1000px; top: -1000px" v-model="decklistText"/>
   </div>
 </template>
 
@@ -12,6 +26,7 @@ import Vue from 'vue';
 import globals from '@/globals';
 import CardStackHeader from '@/components/card/CardStackHeader.vue';
 import CardBlade from '@/components/card/CardBlade.vue';
+import CardStackFooter from '@/components/card/CardStackFooter.vue';
 import { Component } from 'vue-property-decorator';
 import { DECKLIST } from '@/store/actions';
 import { Decklist, CardBundle } from '@/types/decklist';
@@ -20,15 +35,24 @@ import { Decklist, CardBundle } from '@/types/decklist';
   components: {
     CardStackHeader,
     CardBlade,
+    CardStackFooter,
   },
 })
 export default class CardStack extends Vue {
   get decklist(): Decklist {
     return this.$store.state.decklist.decklist;
   }
+  get decklistText(): string {
+    return this.decklist.toString();
+  }
 
-  get bundles(): CardBundle[] {
-    return this.decklist.bundles;
+  private copyToClipboard() {
+    const copyText = document.getElementById('decklistText') as HTMLInputElement;
+    if (!!copyText) {
+      copyText.select();
+      document.execCommand('copy');
+      window.getSelection().removeAllRanges();
+    }
   }
 }
 </script>
@@ -40,22 +64,27 @@ export default class CardStack extends Vue {
 .card-stack {
   display: flex;
   flex-direction: column;
-}
-
-.card-stack-header {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  font-size: 20px;
-
-  > * {
-    margin-left: 10px;
-  }
+  background-color: $decklist-background-color;
 }
 
 .title {
   border: none;
   outline: none;
   min-width: 0;
+}
+
+.header-info {
+  @include row(0, $justify: space-around);
+  margin: 4px 0;
+  .outline {
+    text-align: center;
+    font-size: 18px;
+  }
+}
+
+.bundle {
+  & > :first-child {
+    margin-top: 12px;
+  }
 }
 </style>

@@ -15,10 +15,23 @@ h1 {
 
 h2 {
   font-weight: $roboto-bold;
+  .svg-icon {
+    vertical-align: -2px;
+  }
 }
 
-h3, h4, h5, h6 {
+h3, h4 {
   font-weight: $roboto-regular;
+  .svg-icon {
+    vertical-align: -3px;
+  }
+}
+
+h5, h6 {
+  font-weight: $roboto-regular;
+  .svg-icon {
+    vertical-align: -5px;
+  }
 }
 
 input {
@@ -26,6 +39,11 @@ input {
   border-radius: 5px;
   font-size: 16px;
   padding: 5px;
+}
+
+.outline {
+  color: $text-color-inverted;
+  text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
 }
 
 button {
@@ -101,8 +119,8 @@ button {
 // SVGs
 .svg-icon {
   display: inline-block;
-  width: 16px;
-  height: 16px;
+  width: 20px;
+  height: 20px;
   color: inherit;
   vertical-align: middle;
   fill: none;
