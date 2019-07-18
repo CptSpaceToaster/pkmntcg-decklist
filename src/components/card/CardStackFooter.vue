@@ -6,10 +6,10 @@
     <button class="transparent-light" @click="$emit('saveToDisk')">
       <svgicon id="save_to_disk" name="save_to_disk" :original="true" />
     </button>
-    <button class="transparent-light" @click="$emit('importFromDisk')">
+    <button v-if="false" class="transparent-light" @click="$emit('importFromDisk')">
       <svgicon id="import_from_disk" name="import_from_disk" :original="true" />
     </button>
-    <button class="transparent-light" @click="$emit('importFromClipboard')">
+    <button v-if="false" class="transparent-light" @click="$emit('importFromClipboard')">
       <svgicon id="import_from_clipboard" name="import_from_clipboard" :original="true" />
     </button>
   </div>
