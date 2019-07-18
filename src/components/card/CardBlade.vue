@@ -83,8 +83,15 @@ export default class Card extends Vue {
   align-items: center;
 
   .outline {
-    margin-left: 10px;
+    margin-left: 8px;
     font-size: 20px;
+    flex: 0 1 auto;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  > :first-child {
+    flex: 0 0 auto;
   }
 }
 
