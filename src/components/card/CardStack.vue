@@ -16,8 +16,6 @@
       <CardBlade v-for="bundle in decklist.energyBundles" :key="bundle.card.id" :bundle="bundle"/>
     </div>
     <CardStackFooter @copyToClipboard="copyToClipboard" @saveToDisk="saveToDisk"/>
-    <!-- Hacks -->
-    <textarea id='decklistText' style="position: absolute; left: -1000px; top: -1000px" v-model="decklistText"/>
   </div>
 </template>
 
@@ -80,6 +78,17 @@ export default class CardStack extends Vue {
   display: flex;
   flex-direction: column;
   background-color: $decklist-background-color;
+
+  .card-stack-header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  .card-stack-footer {
+    position: sticky;
+    bottom: 0;
+    z-index: 100;
+  }
 }
 
 .title {
