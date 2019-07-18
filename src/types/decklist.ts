@@ -2,6 +2,19 @@ import store from '@/store';
 import { PokemonTCG } from 'pokemon-tcg-sdk-typescript';
 
 export class Decklist {
+  public static fromJSON(jsonText: string | null) {
+    // I think there's a better way to do this ¯\_(ツ)_/¯
+    const res = new Decklist();
+    if (!!jsonText) {
+      const stored = JSON.parse(jsonText);
+      res.title = stored.title;
+      res.pokemonBundles = stored.pokemonBundles;
+      res.trainerBundles = stored.trainerBundles;
+      res.energyBundles = stored.energyBundles;
+    }
+    return res;
+  }
+
   public title: string = '';
   public pokemonBundles: CardBundle[] = [];
   public trainerBundles: CardBundle[] = [];

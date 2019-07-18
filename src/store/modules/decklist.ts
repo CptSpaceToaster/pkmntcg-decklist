@@ -5,16 +5,18 @@ import { Decklist } from '@/types/decklist';
 
 export const module: Module<DecklistState, RootState> = {
   state: {
-    decklist: new Decklist(),
+    decklist: Decklist.fromJSON(localStorage.getItem('decklist')),
   },
   getters: {},
   mutations: {
     [DECKLIST.ADD_CARD]: (state, card) => {
       state.decklist.addCard(card);
+      localStorage.setItem('decklist', JSON.stringify(state.decklist));
     },
 
     [DECKLIST.REMOVE_CARD]: (state, card) => {
       state.decklist.removeCard(card);
+      localStorage.setItem('decklist', JSON.stringify(state.decklist));
     },
   },
   actions: {
