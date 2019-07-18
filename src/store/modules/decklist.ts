@@ -9,6 +9,11 @@ export const module: Module<DecklistState, RootState> = {
   },
   getters: {},
   mutations: {
+    [DECKLIST.TITLE]: (state, title) => {
+      state.decklist.title = title;
+      localStorage.setItem('decklist', JSON.stringify(state.decklist));
+    },
+
     [DECKLIST.ADD_CARD]: (state, card) => {
       state.decklist.addCard(card);
       localStorage.setItem('decklist', JSON.stringify(state.decklist));

@@ -15,7 +15,7 @@
     <div class="bundle">
       <CardBlade v-for="bundle in decklist.energyBundles" :key="bundle.card.id" :bundle="bundle"/>
     </div>
-    <CardStackFooter @copyToClipboard="copyToClipboard"/>
+    <CardStackFooter @copyToClipboard="copyToClipboard" @saveToDisk="saveToDisk"/>
     <!-- Hacks -->
     <textarea id='decklistText' style="position: absolute; left: -1000px; top: -1000px" v-model="decklistText"/>
   </div>
@@ -47,12 +47,27 @@ export default class CardStack extends Vue {
   }
 
   private copyToClipboard() {
-    const copyText = document.getElementById('decklistText') as HTMLInputElement;
-    if (!!copyText) {
-      copyText.select();
-      document.execCommand('copy');
-      window.getSelection().removeAllRanges();
-    }
+    const textArea = document.createElement('textarea');
+    textArea.value = this.decklistText;
+    document.body.appendChild(textArea);
+    // textArea.focus();
+    textArea.select();
+    document.execCommand('copy');
+    // window.getSelection().removeAllRanges();
+    document.body.removeChild(textArea);
+  }
+
+  private saveToDisk() {
+    const pom = document.createElement('a');
+    pom.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(this.decklistText));
+    pom.setAttribute('download', this.decklist.title || 'New Deck');
+
+    pom.style.display = 'none';
+    document.body.appendChild(pom);
+
+    pom.click();
+
+    document.body.removeChild(pom);
   }
 }
 </script>

@@ -6,6 +6,7 @@ export enum ROOT {
 }
 
 export enum DECKLIST {
+  TITLE = 'DECKLIST_TITLE',
   ADD_CARD = 'DECKLIST_ADD_CARD',
   REMOVE_CARD = 'DECKLIST_REMOVE_CARD',
 }

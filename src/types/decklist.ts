@@ -166,7 +166,7 @@ export class Decklist {
   public getPTCGOCode(card: PokemonTCG.Card): string {
     for (const set of store.state.sets) {
       if (card.setCode === set.code) {
-        return set.ptcgoCode;
+        return set.ptcgoCode || `*${set.code}`;
       }
     }
     return '';
