@@ -6,6 +6,7 @@ import { PokemonTCG } from 'pokemon-tcg-sdk-typescript';
 export interface RootState {
   windowWidth: number;
   sets: PokemonTCG.Set[];
+  postRotationSets: PokemonTCG.Set[];
   standardSets: PokemonTCG.Set[];
   expandedSets: PokemonTCG.Set[];
   supertypes: string[];
@@ -23,6 +24,7 @@ export interface SearchState {
   status: NavigationStatus;
   searchedCards: PokemonTCG.Card[];
   name: string;
+  text: string;
   sets: PokemonTCG.Set[];
   supertypes: string[];
   subtypes: string[];

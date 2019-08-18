@@ -12,6 +12,7 @@ export default new Vuex.Store<RootState>({
   state: {
     windowWidth: window.innerWidth,
     sets: [],
+    postRotationSets: [],
     standardSets: [],
     expandedSets: [],
     supertypes: [
@@ -69,7 +70,9 @@ export default new Vuex.Store<RootState>({
         return moment.utc(b.releaseDate).diff(moment.utc(a.releaseDate));
       });
 
+
       state.standardSets = state.sets.filter((set) => set.standardLegal);
+      state.postRotationSets = state.standardSets.filter((set) => !['sm1', 'sm2', 'sm3', 'sm35', 'sm4'].includes(set.code));
       state.expandedSets = state.sets.filter((set) => set.expandedLegal);
     },
   },

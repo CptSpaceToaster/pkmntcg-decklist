@@ -23,7 +23,11 @@ export default class CardGrid extends Vue {
   }
 
   get cards(): PokemonTCG.Card[] {
-    return this.$store.state.search.searchedCards;
+    if (this.$store.state.search.sets === this.$store.state.postRotationSets) {
+      return this.$store.state.search.searchedCards.filter((card: PokemonTCG.Card) => card.setCode !== 'smp' || parseInt(card.number.slice(2), 10) >= 94);
+    } else {
+      return this.$store.state.search.searchedCards;
+    }
   }
 
   public cardClicked(card: PokemonTCG.Card) {

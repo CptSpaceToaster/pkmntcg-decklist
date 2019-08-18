@@ -3,7 +3,7 @@
     <div class="search-filters">
       <div class='heirloom-filters'>
         <span>
-          <input @input="searchCards" class="search-input" placeholder="Search"/>
+          <input @input="searchCards" class="search-input" placeholder="Card Name">
           <button class="transparent-light" @click="filtersCollapsed = !filtersCollapsed">
             <svgicon id="chevron" name="chevron" :original="true" :class="{'collapsed': filtersCollapsed}"/>
           </button>
@@ -61,7 +61,20 @@ import { PokemonTCG } from 'pokemon-tcg-sdk-typescript';
 export default class SearchFilters extends Vue {
   get availableSets(): PokemonTCG.Set[] {
     return [{
-        code: '',
+        code: 'Post Rotation',
+        expandedLegal: true,
+        logoUrl: '',
+        name: 'Post Rotation',
+        ptcgoCode: '',
+        releaseDate: '',
+        series: '',
+        standardLegal: true,
+        symbolUrl: '',
+        totalCards: -1,
+        updatedAt: '',
+        resource: () => '',
+      }, {
+        code: 'Standard',
         expandedLegal: true,
         logoUrl: '',
         name: 'Standard',
@@ -74,7 +87,7 @@ export default class SearchFilters extends Vue {
         updatedAt: '',
         resource: () => '',
       }, {
-        code: '',
+        code: 'Expanded',
         expandedLegal: true,
         logoUrl: '',
         name: 'Expanded',
@@ -87,7 +100,7 @@ export default class SearchFilters extends Vue {
         updatedAt: '',
         resource: () => '',
       }, {
-        code: '',
+        code: 'None',
         expandedLegal: true,
         logoUrl: '',
         name: 'None',
@@ -120,7 +133,9 @@ export default class SearchFilters extends Vue {
   }
   set filterSets(sets: PokemonTCG.Set[]) {
     const names = sets.map((set) => set.name);
-    if (names.indexOf('Standard') !== -1) {
+    if (names.indexOf('Post Rotation') !== -1) {
+      this.$store.commit(SEARCH.SETS, this.$store.state.postRotationSets);
+    } else if (names.indexOf('Standard') !== -1) {
       this.$store.commit(SEARCH.SETS, this.$store.state.standardSets);
     } else if (names.indexOf('Expanded') !== -1) {
       this.$store.commit(SEARCH.SETS, this.$store.state.expandedSets);
@@ -201,6 +216,11 @@ export default class SearchFilters extends Vue {
     this.$store.commit(SEARCH.NAME, event.target.value);
     this.dispatchSearch();
   }
+
+  public searchText(event: any) {
+    this.$store.commit(SEARCH.TEXT, event.target.value);
+    this.dispatchSearch();
+  }
 }
 </script>
 
@@ -222,6 +242,7 @@ export default class SearchFilters extends Vue {
 .heirloom-filters {
   z-index: 100;
   background-color: $secondary;
+  @include stack($spacing: 5px);
   span {
     @include row($spacing: 5px);
     input {
@@ -256,9 +277,25 @@ export default class SearchFilters extends Vue {
   }
 }
 
-input {
+
+.search-input {
   padding: 10px;
   border: 1px solid $border-color;
+  &:focus::placeholder {
+    visibility: hidden;
+  }
+}
+
+.foo {
+  visibility: hidden;
+}
+input:focus + .foo {
+  visibility: visible;
+  position: absolute;
+  top: 0;
+  left: 20px;
+  color: red;
+  background: white;
 }
 
 .sets {

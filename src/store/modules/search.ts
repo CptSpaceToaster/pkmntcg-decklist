@@ -18,6 +18,7 @@ export const module: Module<SearchState, RootState> = {
     status: NavigationStatus.NONE,
     searchedCards: [],
     name: '',
+    text: '',
     sets: [],
     supertypes: [],
     subtypes: [],
@@ -27,12 +28,17 @@ export const module: Module<SearchState, RootState> = {
     searchQuery: (state) => {
       const query: PokemonTCG.IQuery[] = [];
       if (!!state.name && state.name.length > 0) {
-        if (state.name === 'N') {
+        if (state.name === 'N' && state.sets.length === 0 || ['bw3', 'bw5', 'bwp', 'xy10'].some((code) => state.sets.map((set) => set.code).includes(code))) {
           // Yep >.>
           query.push({ name: 'id', value: nHack.join('|') });
         } else {
           query.push({ name: 'name', value: state.name });
         }
+      }
+      if (!!state.text && state.text.length > 0) {
+        // query.push({ name: 'text', value: state.text});
+        query.push({ name: 'attackText', value: state.text});
+        // query.push({ name: 'abilityText', value: state.text});
       }
       if (!!state.sets && state.sets.length > 0) {
         query.push({ name: 'setCode', value: state.sets.map((set) => set.code).join('|')});
@@ -65,6 +71,10 @@ export const module: Module<SearchState, RootState> = {
 
     [SEARCH.NAME]: (state, name: string) => {
       state.name = name;
+    },
+
+    [SEARCH.TEXT]: (state, text: string) => {
+      state.text = text;
     },
 
     [SEARCH.SETS]: (state, sets: PokemonTCG.Set[]) => {
