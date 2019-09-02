@@ -1,9 +1,9 @@
 <template>
-  <div class="decklist">
+  <div class="decklist-builder">
     <SearchFilters id="search-bar-container"/>
     <CardGrid id="card-grid-container" :class="{'card-stack-shown': isCardStackShown}"/>
-    <CardStackHeader id="card-stack-header-container" @toggleDecklist="toggleList()"/>
-    <CardStack id="card-stack-container" :class="{'card-stack-shown': isCardStackShown}" @toggleDecklist="toggleList()"/>
+    <CardStackHeader id="card-stack-header-container" @toggleInspector="gotoInspector()" @toggleDecklist="toggleList()"/>
+    <CardStack id="card-stack-container" :class="{'card-stack-shown': isCardStackShown}" @toggleInspector="gotoInspector()" @toggleDecklist="toggleList()"/>
   </div>
 </template>
 
@@ -29,6 +29,10 @@ export default class DecklistBuilder extends Vue {
 
   get decklist(): Decklist {
     return this.$store.state.decklist.decklist;
+  }
+
+  private gotoInspector() {
+    this.$router.push('inspector');
   }
 
   private toggleList() {

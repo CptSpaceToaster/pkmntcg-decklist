@@ -1,6 +1,6 @@
 <template>
   <div class="card-stack">
-    <CardStackHeader @toggleDecklist="$emit('toggleDecklist')"/>
+    <CardStackHeader @toggleInspector="$emit('toggleInspector')" @toggleDecklist="$emit('toggleDecklist')"/>
     <span class="header-info">
       <span class="outline">Pokemon<br/>{{decklist.pokemonCount}}</span>
       <span class="outline">Trainers<br/>{{decklist.trainerCount}}</span>
@@ -27,7 +27,8 @@ import CardBlade from '@/components/card/CardBlade.vue';
 import CardStackFooter from '@/components/card/CardStackFooter.vue';
 import { Component } from 'vue-property-decorator';
 import { DECKLIST } from '@/store/actions';
-import { Decklist, CardBundle } from '@/types/decklist';
+import { Decklist } from '@/types/decklist';
+import { CardBundle } from '@/types/bundle';
 
 @Component({
   components: {
@@ -45,6 +46,7 @@ export default class CardStack extends Vue {
   }
 
   private copyToClipboard() {
+    this.decklist.sort();
     const textArea = document.createElement('textarea');
     textArea.value = this.decklistText;
     document.body.appendChild(textArea);
@@ -56,6 +58,7 @@ export default class CardStack extends Vue {
   }
 
   private saveToDisk() {
+    this.decklist.sort();
     const pom = document.createElement('a');
     pom.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(this.decklistText));
     pom.setAttribute('download', this.decklist.title || 'New Deck');

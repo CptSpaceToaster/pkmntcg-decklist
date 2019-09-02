@@ -61,19 +61,6 @@ import { PokemonTCG } from 'pokemon-tcg-sdk-typescript';
 export default class SearchFilters extends Vue {
   get availableSets(): PokemonTCG.Set[] {
     return [{
-        code: 'Post Rotation',
-        expandedLegal: true,
-        logoUrl: '',
-        name: 'Post Rotation',
-        ptcgoCode: '',
-        releaseDate: '',
-        series: '',
-        standardLegal: true,
-        symbolUrl: '',
-        totalCards: -1,
-        updatedAt: '',
-        resource: () => '',
-      }, {
         code: 'Standard',
         expandedLegal: true,
         logoUrl: '',

@@ -1,0 +1,53 @@
+<template>
+  <div class="decklist-inspector">
+    <DeckGrid id="deck-grid-container"/>
+    <CardStackHeader id="card-stack-header-container" @toggleInspector="gotoBuilder()" @toggleDecklist="toggleList()"/>
+  </div>
+</template>
+
+<script lang="ts">
+import Vue from 'vue';
+import DeckGrid from '@/components/card/DeckGrid.vue';
+import CardStackHeader from '@/components/card/CardStackHeader.vue';
+import { Component } from 'vue-property-decorator';
+import { Decklist } from '@/types/decklist';
+
+@Component({
+  components: {
+    DeckGrid,
+    CardStackHeader,
+  },
+})
+export default class DecklistInspector extends Vue {
+  private isCardStackShown = window.innerWidth > 550;
+
+  get decklist(): Decklist {
+    return this.$store.state.decklist.decklist;
+  }
+
+  private toggleList() {
+    this.isCardStackShown = !this.isCardStackShown;
+  }
+
+  private gotoBuilder() {
+    this.$router.push('builder');
+  }
+}
+</script>
+
+<style lang="scss">
+@import "@style/_structure.scss";
+@import "@style/_colors.scss";
+
+$card-stack-width: 300px;
+
+#card-stack-header-container {
+  position: fixed;
+  right: 0;
+  width: $card-stack-width;
+  bottom: 0;
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
+  border: 1px solid $border-color;
+}
+</style>

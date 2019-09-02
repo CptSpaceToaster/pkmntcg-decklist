@@ -3,7 +3,7 @@ import Vuex from 'vuex';
 import moment from 'moment';
 import { PokemonTCG } from 'pokemon-tcg-sdk-typescript';
 import { modules } from '@/store/modules';
-import { ROOT } from '@/store/actions';
+import { ROOT, SEARCH } from '@/store/actions';
 import { RootState } from '@/types/state';
 
 Vue.use(Vuex);
@@ -80,6 +80,7 @@ export default new Vuex.Store<RootState>({
       PokemonTCG.Set.all()
         .then((sets) => {
           commit(ROOT.SETS, sets);
+          commit(SEARCH.SORT);
         })
         .catch((error) => {
           if (!!error.response && error.response.status >= 500 && error.response.status < 600) {

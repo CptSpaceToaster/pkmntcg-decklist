@@ -54,12 +54,16 @@
         </span>
       </h5>
     </template>
-    <template v-if="card.supertype === 'Pokémon'">
-      <h5>
-        Retreat Cost
-        <svgicon v-for="(type, index) in card.retreatCost" :id="type" :name="type" :original="true" :key="[card.id, 'retreat', index].join('-')"/>
-      </h5>
-    </template>
+    <span class="card-info-footer">
+      <template v-if="card.supertype === 'Pokémon'">
+        <h5>
+          Retreat Cost
+          <svgicon v-for="(type, index) in card.retreatCost" :id="type" :name="type" :original="true" :key="[card.id, 'retreat', index].join('-')"/>
+        </h5>
+      </template>
+      <h5 style="float=right;">{{cardCode}}</h5>
+    </span>
+
   </div>
 </template>
 
@@ -75,6 +79,18 @@ import { PokemonTCG } from 'pokemon-tcg-sdk-typescript';
 })
 export default class CardInfo extends Vue {
   @Prop() public card!: PokemonTCG.Card;
+
+  get set(): PokemonTCG.Set {
+    return this.$store.state.sets.find((set: PokemonTCG.Set) => this.card.setCode === set.code);
+  }
+
+  get cardCode(): string {
+    if (!!this.set) {
+      return `${this.set.name} ${this.card.number}/${this.set.totalCards}`;
+    } else {
+      return `${this.card.number}`;
+    }
+  }
 }
 </script>
 
@@ -90,6 +106,13 @@ export default class CardInfo extends Vue {
   h5 {
     margin-top: 3px;
     margin-bottom: 3px;
+  }
+}
+
+.card-info-footer {
+  @include row();
+  :first-child {
+    flex: 1 1 auto;
   }
 }
 </style>

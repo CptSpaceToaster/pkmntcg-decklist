@@ -1,5 +1,6 @@
 import store from '@/store';
 import { PokemonTCG } from 'pokemon-tcg-sdk-typescript';
+import { CardBundle, bundleCompare } from '@/types/bundle';
 
 export class Decklist {
   public static fromJSON(jsonText: string | null) {
@@ -63,9 +64,6 @@ export class Decklist {
   }
 
   public addCard(card: PokemonTCG.Card): boolean {
-    if (this.count >= 60) {
-      return false;
-    }
     if (this.countMatchingNames(card.name) >= this.cardLimit(card)) {
       return false;
     }
@@ -133,6 +131,12 @@ export class Decklist {
     return count;
   }
 
+  public sort() {
+    this.trainerBundles.sort(bundleCompare);
+    this.energyBundles.sort(bundleCompare);
+    this.pokemonBundles.sort(bundleCompare);
+  }
+
   public cardLimit(card: PokemonTCG.Card): number {
     if (card.supertype === 'Energy' && card.subtype === 'Basic') {
       return 59;
@@ -164,10 +168,9 @@ export class Decklist {
   }
 
   public getPTCGOCode(card: PokemonTCG.Card): string {
-    for (const set of store.state.sets) {
-      if (card.setCode === set.code) {
-        return set.ptcgoCode || `*${set.code}`;
-      }
+    const set = store.state.sets.find((set) => card.setCode === set.code);
+    if (!!set) {
+      return set.ptcgoCode || `*${set.code}`;
     }
     return '';
   }
@@ -196,9 +199,4 @@ export class Decklist {
     }
     return 0;
   }
-}
-
-export interface CardBundle {
-  card: PokemonTCG.Card;
-  count: number;
 }

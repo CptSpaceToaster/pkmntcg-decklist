@@ -1,9 +1,12 @@
 <template>
   <div class="card-blade">
-    <div class="crop" :style="cropStyle">
-      <span class="outline">{{bundle.count}}</span>
-      <span class="outline">{{card.name}}</span>
-    </div>
+    <v-popover class="popover-container" trigger="hover" :disabled="!isCardInfoVisible" placement="left" :delay="{show: 300, hide: 0}" boundariesElement="viewport">
+      <div class="crop" :style="cropStyle">
+        <span class="outline">{{bundle.count}}</span>
+        <span class="outline">{{card.name}}</span>
+      </div>
+      <CardInfo :card="card" slot="popover"/>
+    </v-popover>
     <div class="controls">
       <button class="transparent-light" @click="addCard()">
         <svgicon id="plus" name="plus" :original="true" />
@@ -17,13 +20,15 @@
 
 <script lang="ts">
 import Vue from 'vue';
+import CardInfo from '@/components/card/CardInfo.vue';
 import { Component, Prop } from 'vue-property-decorator';
 import { PokemonTCG } from 'pokemon-tcg-sdk-typescript';
 import { DECKLIST } from '@/store/actions';
-import { CardBundle } from '@/types/decklist';
+import { CardBundle } from '@/types/bundle';
 
 @Component({
   components: {
+    CardInfo,
   },
 })
 export default class Card extends Vue {
@@ -31,6 +36,10 @@ export default class Card extends Vue {
 
   get card(): PokemonTCG.Card {
     return this.bundle.card;
+  }
+
+  get isCardInfoVisible(): boolean {
+    return this.$store.state.windowWidth > 550;
   }
 
   get cropHeight(): string {
@@ -74,11 +83,13 @@ export default class Card extends Vue {
   background-color: $decklist-background-color;
   display: flex;
 }
-
+.popover-container {
+  width: 200px;
+}
 .crop {
   box-shadow:inset 0 0 6px 4px $decklist-background-color;
+  width: 180px;
   height: 50px;
-  width: 200px;
   display: flex;
   align-items: center;
 

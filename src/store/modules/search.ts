@@ -3,6 +3,7 @@ import { PokemonTCG } from 'pokemon-tcg-sdk-typescript';
 import { RootState, SearchState } from '@/types/state';
 import { SEARCH } from '@/store/actions';
 import { NavigationStatus } from '@/types/network';
+import { cardCompare } from '@/types/bundle';
 
 const nHack: string[] =  [
   'bw3-92',
@@ -28,7 +29,7 @@ export const module: Module<SearchState, RootState> = {
     searchQuery: (state) => {
       const query: PokemonTCG.IQuery[] = [];
       if (!!state.name && state.name.length > 0) {
-        if (state.name === 'N' && state.sets.length === 0 || ['bw3', 'bw5', 'bwp', 'xy10'].some((code) => state.sets.map((set) => set.code).includes(code))) {
+        if (state.name === 'N' && (state.sets.length === 0 || ['bw3', 'bw5', 'bwp', 'xy10'].some((code) => state.sets.map((set) => set.code).includes(code)))) {
           // Yep >.>
           query.push({ name: 'id', value: nHack.join('|') });
         } else {
@@ -62,7 +63,11 @@ export const module: Module<SearchState, RootState> = {
 
     [SEARCH.SUCCESS]: (state, cards: PokemonTCG.Card[]) => {
       state.status = NavigationStatus.NONE;
-      state.searchedCards = cards;
+      state.searchedCards = cards.sort(cardCompare);
+    },
+
+    [SEARCH.SORT]: (state) => {
+      state.searchedCards.sort(cardCompare);
     },
 
     [SEARCH.FAILURE]: (state) => {

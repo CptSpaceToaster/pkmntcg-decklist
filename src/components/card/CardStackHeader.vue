@@ -2,6 +2,9 @@
   <div class="card-stack-header">
     <span>{{ `${this.decklist.count}/60` }}</span>
     <input @input="changeTitle" class="title" placeholder="Deck Title" v-model="decklist.title"/>
+    <!-- <button class="transparent-light" @click="$emit('toggleInspector')">
+      <svgicon id="hamburger" name="hamburger" :original="true" />
+    </button> -->
     <button class="transparent-light" @click="$emit('toggleDecklist')">
       <svgicon id="hamburger" name="hamburger" :original="true" />
     </button>
