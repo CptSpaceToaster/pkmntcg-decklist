@@ -20,6 +20,7 @@
       @saveToFile="saveToFile"
       @trash="trash"
       @saveToDisk="saveToDisk"
+      @importFromDisk="importFromDisk"
       />
   </div>
 </template>
@@ -31,7 +32,7 @@ import CardStackHeader from '@/components/card/CardStackHeader.vue';
 import CardBlade from '@/components/card/CardBlade.vue';
 import CardStackFooter from '@/components/card/CardStackFooter.vue';
 import { Component } from 'vue-property-decorator';
-import { DECKLIST } from '@/store/actions';
+import { DECKLIST, MODAL } from '@/store/actions';
 import { Decklist } from '@/types/decklist';
 import { CardBundle } from '@/types/bundle';
 
@@ -83,6 +84,10 @@ export default class CardStack extends Vue {
   private saveToDisk() {
     this.decklist.sort();
     this.$store.commit(DECKLIST.SAVE);
+  }
+
+  private importFromDisk() {
+    this.$store.commit(MODAL.LOAD_DECKLIST, true);
   }
 }
 </script>

@@ -2,6 +2,7 @@
   <div>
     <navigation-header/>
     <router-view/>
+    <LoadDecklistModal v-show="$store.state.modal.loadDecklist"/>
   </div>
 </template>
 
@@ -9,12 +10,14 @@
 import Vue from 'vue';
 import NavigationHeader from '@/components/navigation/NavigationHeader.vue';
 import NavigationFooter from '@/components/navigation/NavigationFooter.vue';
+import LoadDecklistModal from '@/components/modals/LoadDecklistModal.vue';
 import { Component } from 'vue-property-decorator';
 import { ROOT, SEARCH } from '@/store/actions.ts';
 
 @Component({
   components: {
     NavigationHeader,
+    LoadDecklistModal,
   },
 })
 export default class App extends Vue {

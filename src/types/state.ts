@@ -31,3 +31,7 @@ export interface SearchState {
   subtypes: string[];
   types: string[];
 }
+
+export interface ModalState {
+  loadDecklist: boolean;
+}

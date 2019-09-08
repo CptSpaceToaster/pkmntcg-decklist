@@ -12,7 +12,7 @@
     <button class="transparent-light" @click="$emit('saveToDisk')">
       <svgicon id="save_to_disk" name="save_to_disk" :original="true" />
     </button>
-    <button v-if="false" class="transparent-light" @click="$emit('importFromDisk')">
+    <button class="transparent-light" @click="$emit('importFromDisk')">
       <svgicon id="import_from_disk" name="import_from_disk" :original="true" />
     </button>
   </div>

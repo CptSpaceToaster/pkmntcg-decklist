@@ -55,7 +55,7 @@ export default class Card extends Vue {
     return `
       background: url(${this.card.imageUrl});
       background-repeat: no-repeat;
-      background-position: -20px ${this.cropHeight};
+      background-position: -24px ${this.cropHeight};
       `;
   }
 

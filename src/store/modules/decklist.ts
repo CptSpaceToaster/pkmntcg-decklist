@@ -31,13 +31,23 @@ export const module: Module<DecklistState, RootState> = {
     },
 
     [DECKLIST.SAVE]: (state) => {
-      state.slots.push(state.decklist.title);
-      localStorage.setItem('slots', JSON.stringify(state.slots));
-      localStorage.setItem(`decklist-${state.decklist.title}`, JSON.stringify(state.decklist));
+      if (state.decklist.title !== '') {
+        localStorage.setItem(`decklist-${state.decklist.title}`, JSON.stringify(state.decklist));
+        if (state.slots.indexOf(state.decklist.title) === -1) {
+          state.slots.push(state.decklist.title);
+          localStorage.setItem('slots', JSON.stringify(state.slots));
+        }
+      }
     },
 
     [DECKLIST.LOAD]: (state, newTitle) => {
       state.decklist = Decklist.fromJSON(localStorage.getItem(`decklist-${newTitle}`));
+    },
+
+    [DECKLIST.DELETE]: (state, oldTitle) => {
+      localStorage.removeItem(`decklist-${oldTitle}`);
+      state.slots = state.slots.filter((e) => e !== oldTitle);
+      localStorage.setItem('slots', JSON.stringify(state.slots));
     },
   },
   actions: {

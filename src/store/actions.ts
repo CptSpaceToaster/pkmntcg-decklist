@@ -30,3 +30,8 @@ export enum SEARCH {
 
   REQUEST = 'SEARCH_REQUEST',
 }
+
+export enum MODAL {
+  CLEAR = 'MODAL_CLEAR',
+  LOAD_DECKLIST = 'MODAL_LOAD_DECKLIST',
+}
