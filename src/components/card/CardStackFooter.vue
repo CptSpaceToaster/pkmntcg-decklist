@@ -1,19 +1,19 @@
 <template>
   <div class="card-stack-footer">
-    <button class="transparent-light" @click="copyToClipboard">
-      <svgicon id="copy_to_clipboard" name="copy_to_clipboard" :original="true" />
+    <button class="transparent-light" @click="copyToClipboard" @shown="delay2" v-tippy="{content: 'Copied to Clipboard!'}">
+      <svgicon id="copy_to_clipboard" name="copy_to_clipboard" :original="true"/>
     </button>
-    <button class="transparent-light" @click="$emit('saveToFile')">
-      <svgicon id="save_to_text" name="save_to_text" :original="true" />
+    <button class="transparent-light" @click="$emit('saveToFile')" @shown="delay2" v-tippy="{content: 'Saving!'}">
+      <svgicon id="save_to_text" name="save_to_text" :original="true"/>
     </button>
-    <button class="transparent-light" @click="$emit('trash')">
-      <svgicon id="trash" name="trash" :original="true" />
+    <button class="transparent-light" @click="$emit('trash')" @shown="delay2" v-tippy="{content: 'Cleared!'}">
+      <svgicon id="trash" name="trash" :original="true"/>
     </button>
-    <button class="transparent-light" @click="$emit('saveToDisk')">
-      <svgicon id="save_to_disk" name="save_to_disk" :original="true" />
+    <button class="transparent-light" @click="$emit('saveToDisk')" @shown="delay2" v-tippy="{content: `${decklist.title} Saved!`}">
+      <svgicon id="save_to_disk" name="save_to_disk" :original="true"/>
     </button>
     <button class="transparent-light" @click="$emit('importFromDisk')">
-      <svgicon id="import_from_disk" name="import_from_disk" :original="true" />
+      <svgicon id="import_from_disk" name="import_from_disk" :original="true"/>
     </button>
   </div>
 </template>
@@ -41,6 +41,10 @@ export default class CardStackFooter extends Vue {
     this.showCopy = true;
     this.$emit('copyToClipboard');
     setTimeout(() => this.showCopy = false, 1500);
+  }
+
+  private delay2(el: any) {
+    setTimeout(() => { el.hide(true); }, 2000);
   }
 }
 </script>

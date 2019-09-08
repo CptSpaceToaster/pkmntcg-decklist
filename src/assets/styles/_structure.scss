@@ -25,3 +25,44 @@ $default--min-clickable: 44px;
     margin-bottom: $spacing;
   }
 }
+
+// mixin based on https://github.com/sass-mq/sass-mq
+@mixin mq(
+  $from: false,
+  $until: false,
+  $and: false,
+  $media-type: 'only screen'
+) {
+  $media-query: '';
+
+  @if $from { $media-query: '#{$media-query} and (min-width: #{$from})'; }
+  @if $until { $media-query: '#{$media-query} and (max-width: #{$until})'; }
+  @if $and { $media-query: '#{$media-query} and #{$and}'; }
+
+  @media #{$media-type + $media-query} {
+    @content;
+  }
+}
+
+// These values whould match those found in main.ts used with VueMq
+$sm: 550px;
+$md: 1050px;
+$lg: infinite;
+
+@mixin sm() {
+  @include mq($until: $sm) {
+    @content;
+  }
+}
+
+@mixin md() {
+  @include mq($from: $sm, $until: $md) {
+    @content;
+  }
+}
+
+@mixin lg() {
+  @include mq($from: $md) {
+    @content;
+  }
+}

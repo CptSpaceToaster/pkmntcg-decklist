@@ -7,10 +7,10 @@
     <!-- <CardInfo :card="card"/> -->
     <div class="controls">
       <button class="transparent-dark" @click="addCard()">
-        <svgicon id="plus" name="plus" :original="true" />
+        <svgicon id="plus" name="plus" :original="true"/>
       </button>
       <button class="transparent-dark" @click="removeCard()">
-        <svgicon id="minus" name="minus" :original="true" />
+        <svgicon id="minus" name="minus" :original="true"/>
       </button>
     </div>
   </div>

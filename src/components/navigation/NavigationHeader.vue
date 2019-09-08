@@ -5,6 +5,10 @@
       <router-link :to="{ path: 'builder' }">Creator</router-link>
       <router-link :to="{ path: 'inspector' }">Inspector</router-link>
     </div>
+
+    <a href="https://github.com/CptSpaceToaster/pkmntcg-decklist">
+      <svgicon id="github" name="github" :original="true" />
+    </a>
   </div>
 </template>
 
@@ -41,16 +45,16 @@ export default class NavigationHeader extends Vue {
     @include row();
     flex: 1 0 auto;
     justify-content: flex-end;
+  }
 
-    a {
-      text-align: right;
-      color: $text-color-inverted;
-      font-size: 20px;
-      padding: 5px;
-      text-decoration: none;
-      &:hover {
-        text-decoration: underline;
-      }
+  a {
+    text-align: right;
+    color: $text-color-inverted;
+    font-size: 20px;
+    padding: 5px;
+    text-decoration: none;
+    &:hover {
+      text-decoration: underline;
     }
   }
 }

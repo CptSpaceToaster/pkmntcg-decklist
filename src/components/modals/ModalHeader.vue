@@ -34,5 +34,9 @@ export default class ModalHeader extends Vue {
   &>:first-child {
     flex: 1 1 auto;
   }
+
+  @include sm {
+    border-radius: 0;
+  }
 }
 </style>

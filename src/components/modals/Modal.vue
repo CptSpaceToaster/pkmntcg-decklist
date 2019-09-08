@@ -2,13 +2,13 @@
   <transition name="modal">
     <div class="modal-mask" @click="maskPressed">
       <div class="modal-container">
-        <div class="modal-header">
+        <div class="modal-header" :class="$mq">
           <slot name="header">default header</slot>
         </div>
-        <div class="modal-body">
+        <div class="modal-body" :class="$mq">
           <slot name="body"></slot>
         </div>
-        <div class="modal-footer">
+        <div class="modal-footer" :class="$mq">
           <slot name="footer"></slot>
         </div>
       </div>
@@ -61,6 +61,11 @@ export default class Modal extends Vue {
   box-shadow: 0 2px 8px rgba(0, 0, 0, .33);
   transition: all .3s ease;
   background-color: white;
+
+  @include sm {
+    margin: 0;
+    border-radius: 0;
+  }
 }
 
 .modal-header {
@@ -81,5 +86,13 @@ export default class Modal extends Vue {
 
 .modal-leave-active {
   opacity: 0;
+}
+
+.modal-enter .modal-container,
+.modal-leave-active .modal-container {
+  @include sm {
+    -webkit-transform: translateY(100%);
+    transform: translateY(100%);
+  }
 }
 </style>
