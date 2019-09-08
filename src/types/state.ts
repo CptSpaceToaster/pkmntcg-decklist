@@ -18,6 +18,7 @@ export interface RootState {
 
 export interface DecklistState {
   decklist: Decklist;
+  slots: string[];
 }
 
 export interface SearchState {

@@ -1,17 +1,15 @@
 <template>
   <div class="card-blade">
-    <v-popover class="popover-container" trigger="hover" :disabled="!isCardInfoVisible" placement="left" :delay="{show: 300, hide: 0}" boundariesElement="viewport">
-      <div class="crop" :style="cropStyle">
-        <span class="outline">{{bundle.count}}</span>
-        <span class="outline">{{card.name}}</span>
-      </div>
-      <CardInfo :card="card" slot="popover"/>
-    </v-popover>
+    <div class="crop" :style="cropStyle">
+      <span class="outline bundle-count">{{bundle.count}}</span>
+      <span class="outline">{{card.name}}</span>
+    </div>
+    <!-- <CardInfo :card="card"/> -->
     <div class="controls">
-      <button class="transparent-light" @click="addCard()">
+      <button class="transparent-dark" @click="addCard()">
         <svgicon id="plus" name="plus" :original="true" />
       </button>
-      <button class="transparent-light" @click="removeCard()">
+      <button class="transparent-dark" @click="removeCard()">
         <svgicon id="minus" name="minus" :original="true" />
       </button>
     </div>
@@ -36,10 +34,6 @@ export default class Card extends Vue {
 
   get card(): PokemonTCG.Card {
     return this.bundle.card;
-  }
-
-  get isCardInfoVisible(): boolean {
-    return this.$store.state.windowWidth > 550;
   }
 
   get cropHeight(): string {
@@ -83,36 +77,29 @@ export default class Card extends Vue {
   background-color: $decklist-background-color;
   display: flex;
 }
-.popover-container {
-  width: 200px;
-}
 .crop {
   box-shadow:inset 0 0 6px 4px $decklist-background-color;
-  width: 180px;
+  flex: 1 1 auto;
+  min-width: 0;
   height: 50px;
   display: flex;
   align-items: center;
 
-  .outline {
-    margin-left: 8px;
-    font-size: 20px;
-    flex: 0 1 auto;
-    overflow: hidden;
-    text-overflow: ellipsis;
+  .bundle-count {
+    flex: 0 0 auto;
   }
 
-  > :first-child {
-    flex: 0 0 auto;
+  .outline {
+    margin: 4px;
+    font-size: 20px;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 }
 
 .controls {
-  flex: 1 1 auto;
   display: flex;
   justify-content: flex-end;
   align-items: center;
-  > :last-child {
-    transform: rotate(180deg)
-  }
 }
 </style>

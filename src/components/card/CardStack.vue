@@ -15,7 +15,12 @@
     <div class="bundle">
       <CardBlade v-for="bundle in decklist.energyBundles" :key="bundle.card.id" :bundle="bundle"/>
     </div>
-    <CardStackFooter @copyToClipboard="copyToClipboard" @saveToDisk="saveToDisk"/>
+    <CardStackFooter
+      @copyToClipboard="copyToClipboard"
+      @saveToFile="saveToFile"
+      @trash="trash"
+      @saveToDisk="saveToDisk"
+      />
   </div>
 </template>
 
@@ -57,7 +62,7 @@ export default class CardStack extends Vue {
     document.body.removeChild(textArea);
   }
 
-  private saveToDisk() {
+  private saveToFile() {
     this.decklist.sort();
     const pom = document.createElement('a');
     pom.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(this.decklistText));
@@ -70,6 +75,15 @@ export default class CardStack extends Vue {
 
     document.body.removeChild(pom);
   }
+
+  private trash() {
+    this.$store.commit(DECKLIST.EMPTY);
+  }
+
+  private saveToDisk() {
+    this.decklist.sort();
+    this.$store.commit(DECKLIST.SAVE);
+  }
 }
 </script>
 
@@ -81,6 +95,7 @@ export default class CardStack extends Vue {
   display: flex;
   flex-direction: column;
   background-color: $decklist-background-color;
+  overflow-y: overlay;
 
   .card-stack-header {
     position: sticky;

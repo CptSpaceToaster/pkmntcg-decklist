@@ -3,7 +3,7 @@
     <div class="search-filters">
       <div class='heirloom-filters'>
         <span>
-          <input @input="searchCards" class="search-input" placeholder="Card Name">
+          <input @input="searchName" class="search-input" placeholder="Card Name">
           <button class="transparent-light" @click="filtersCollapsed = !filtersCollapsed">
             <svgicon id="chevron" name="chevron" :original="true" :class="{'collapsed': filtersCollapsed}"/>
           </button>
@@ -199,7 +199,7 @@ export default class SearchFilters extends Vue {
 
   private filtersCollapsed = !(window.innerWidth > 550);
 
-  public searchCards(event: any) {
+  public searchName(event: any) {
     this.$store.commit(SEARCH.NAME, event.target.value);
     this.dispatchSearch();
   }

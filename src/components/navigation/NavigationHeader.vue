@@ -1,7 +1,11 @@
 <template>
-  <span class="navigation-header">
-    {{ this.$route.meta.navigationTitle }}
-  </span>
+  <div class="navigation-header">
+    <div class="single-line title">{{ this.$route.meta.navigationTitle }}</div>
+    <div class="routes">
+      <router-link :to="{ path: 'builder' }">Creator</router-link>
+      <router-link :to="{ path: 'inspector' }">Inspector</router-link>
+    </div>
+  </div>
 </template>
 
 <script lang="ts">
@@ -23,9 +27,31 @@ export default class NavigationHeader extends Vue {
 
 .navigation-header {
   @include row();
-  padding: 20px;
+  padding: 10px;
   background-color: $primary;
-  color: $text-color-inverted;
-  font-size: 26px;
+  flex-wrap: wrap;
+
+  .title {
+    color: $text-color-inverted;
+    font-size: 26px;
+    padding: 10px;
+  }
+
+  .routes {
+    @include row();
+    flex: 1 0 auto;
+    justify-content: flex-end;
+
+    a {
+      text-align: right;
+      color: $text-color-inverted;
+      font-size: 20px;
+      padding: 5px;
+      text-decoration: none;
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
 }
 </style>

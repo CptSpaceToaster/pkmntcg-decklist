@@ -1,36 +1,27 @@
 <template>
-  <div class="card" @click="$emit('cardClicked')">
-    <v-popover class="card-popover-container" trigger="hover" :disabled="!isCardInfoVisible" placement="right" :delay="{show: 300, hide: 0}" :offset="5">
-      <div class="card-image-container">
-        <picture>
-          <source media="(min-width: 550px)" :srcset="card.imageUrl">
-          <img :src="card.imageUrlHiRes">
-        </picture>
-      </div>
-      <CardInfo :card="card" slot="popover"/>
-    </v-popover>
-    <div class="card-name">{{card.name}}</div>
-    <div class="card-code subhead">{{cardCode}}</div>
+  <div class="card">
+    <CardImage :src="card.imageUrl" @imageClicked="$emit('cardClicked')"/>
+    <!-- <CardInfo :card="card"/> -->
+    <div class="single-line">{{card.name}}</div>
+    <div class="single-line subhead">{{cardCode}}</div>
   </div>
 </template>
 
 <script lang="ts">
 import Vue from 'vue';
 import CardInfo from '@/components/card/CardInfo.vue';
+import CardImage from '@/components/card/CardImage.vue';
 import { Component, Prop } from 'vue-property-decorator';
 import { PokemonTCG } from 'pokemon-tcg-sdk-typescript';
 
 @Component({
   components: {
     CardInfo,
+    CardImage,
   },
 })
 export default class Card extends Vue {
   @Prop() public card!: PokemonTCG.Card;
-
-  get isCardInfoVisible(): boolean {
-    return this.$store.state.windowWidth > 550;
-  }
 
   get set(): PokemonTCG.Set {
     return this.$store.state.sets.find((set: PokemonTCG.Set) => this.card.setCode === set.code);
@@ -43,10 +34,6 @@ export default class Card extends Vue {
       return `${this.card.number}`;
     }
   }
-
-  get tooltipContent(): string {
-    return `${this.card.name}`;
-  }
 }
 </script>
 
@@ -58,37 +45,10 @@ export default class Card extends Vue {
   @include stack($spacing: 5px);
   margin: 10px;
   text-align: center;
+  width: 280px;
 
-  .card-image-container {
-    position: relative;
-    width: 240px;
-    height: 0;
-    padding-top: calc(340 / 240 * 100%);
-  }
-
-  img {
-    position: absolute;
-    z-index: -1;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    border-radius: 12px;
-  }
-
-  @media (max-width: 550px) {
-    width: 100%;
-    .card-image-container {
-      width: 100%;
-      margin-bottom: 10px;
-    }
-    .card-popover-container {
-      display: contents;
-    }
-    img {
-      border-radius: 8px;
-    }
+  >:first-child {
+    margin-bottom: 10px;
   }
 }
 </style>

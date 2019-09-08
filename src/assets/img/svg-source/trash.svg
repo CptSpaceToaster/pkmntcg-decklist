@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="20px" height="20px" viewBox="0 0 20 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 57.1 (83088) - https://sketch.com -->
+    <title>trash</title>
+    <desc>Created with Sketch.</desc>
+    <g id="trash" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round">
+        <polyline id="Bin" stroke="#212121" stroke-linejoin="round" points="4 5.5 5 16.5 15 16.5 16 5.5"></polyline>
+        <path d="M16.5,4 L11.5,4 C11.5,3 11,2.5 10,2.5 C9,2.5 8.5,3 8.5,4 L3.5,4" id="Lid" stroke="#212121"></path>
+        <g id="Lines" transform="translate(6.750000, 6.000000)" stroke="#212121" stroke-linejoin="round">
+            <path d="M6.25,0.5 L5.75,7.5" id="Line-3"></path>
+            <path d="M3.25,0.5 L3.25,7.5" id="Line-2"></path>
+            <path d="M0.25,0.5 L0.75,7.5" id="Line-1"></path>
+        </g>
+    </g>
+</svg>

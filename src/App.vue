@@ -40,7 +40,6 @@ export default class App extends Vue {
 @import "@style/_structure.scss";
 @import "@style/_colors.scss";
 @import "@style/common.scss";
-@import "@style/tooltip.scss";
 
 body {
   margin: 0;

@@ -1,16 +1,19 @@
 <template>
   <div class="card-stack-footer">
-    <button class="transparent-light" @click="copyToClipboard" v-tooltip="{content: 'Copied!', trigger: 'manual', show: showCopy}">
+    <button class="transparent-light" @click="copyToClipboard">
       <svgicon id="copy_to_clipboard" name="copy_to_clipboard" :original="true" />
+    </button>
+    <button class="transparent-light" @click="$emit('saveToFile')">
+      <svgicon id="save_to_text" name="save_to_text" :original="true" />
+    </button>
+    <button class="transparent-light" @click="$emit('trash')">
+      <svgicon id="trash" name="trash" :original="true" />
     </button>
     <button class="transparent-light" @click="$emit('saveToDisk')">
       <svgicon id="save_to_disk" name="save_to_disk" :original="true" />
     </button>
     <button v-if="false" class="transparent-light" @click="$emit('importFromDisk')">
       <svgicon id="import_from_disk" name="import_from_disk" :original="true" />
-    </button>
-    <button v-if="false" class="transparent-light" @click="$emit('importFromClipboard')">
-      <svgicon id="import_from_clipboard" name="import_from_clipboard" :original="true" />
     </button>
   </div>
 </template>
@@ -52,10 +55,6 @@ export default class CardStackFooter extends Vue {
   background-color: $secondary;
   button {
     flex: 1 1 auto;
-    .svg-icon {
-      width: 28px;
-      height: 28px;
-    }
   }
 }
 </style>

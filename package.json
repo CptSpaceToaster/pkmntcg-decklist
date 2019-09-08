@@ -14,7 +14,6 @@
     "lodash": "^4.17.14",
     "moment": "^2.24.0",
     "pokemon-tcg-sdk-typescript": "^1.1.0",
-    "v-tooltip": "^2.0.2",
     "vue": "^2.6.10",
     "vue-class-component": "^7.0.2",
     "vue-multiselect": "^2.1.6",

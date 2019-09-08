@@ -47,6 +47,7 @@ export default class CardGrid extends Vue {
   justify-content: center;
   flex-wrap: wrap;
   padding: 20px;
+  padding-bottom: 40px;
   transition: opacity $default--transition-duration ease;
 
   &.loading {

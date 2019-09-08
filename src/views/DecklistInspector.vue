@@ -8,14 +8,12 @@
 <script lang="ts">
 import Vue from 'vue';
 import DeckGrid from '@/components/card/DeckGrid.vue';
-import CardStackHeader from '@/components/card/CardStackHeader.vue';
 import { Component } from 'vue-property-decorator';
 import { Decklist } from '@/types/decklist';
 
 @Component({
   components: {
     DeckGrid,
-    CardStackHeader,
   },
 })
 export default class DecklistInspector extends Vue {

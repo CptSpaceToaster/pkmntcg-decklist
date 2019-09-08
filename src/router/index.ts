@@ -3,7 +3,6 @@ import Router from 'vue-router';
 import DecklistBuilder from '@/views/DecklistBuilder.vue';
 import DecklistInspector from '@/views/DecklistInspector.vue';
 
-
 Vue.use(Router);
 
 export default new Router({

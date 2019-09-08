@@ -4,9 +4,9 @@
 import icon from 'vue-svgicon'
 icon.register({
   'hamburger': {
-    width: 32,
-    height: 32,
-    viewBox: '0 0 32 32',
-    data: '<path pid="0" d="M4 10h24a2 2 0 0 0 0-4H4a2 2 0 0 0 0 4zm24 4H4a2 2 0 0 0 0 4h24a2 2 0 0 0 0-4zm0 8H4a2 2 0 0 0 0 4h24a2 2 0 0 0 0-4z"/>'
+    width: 20,
+    height: 20,
+    viewBox: '0 0 20 20',
+    data: '<g _fill="#212121" fill-rule="evenodd"><rect pid="0" x="3" y="5" width="14" height="2" rx="1"/><rect pid="1" x="3" y="9" width="14" height="2" rx="1"/><rect pid="2" x="3" y="13" width="14" height="2" rx="1"/></g>'
   }
 })

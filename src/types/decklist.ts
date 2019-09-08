@@ -3,7 +3,7 @@ import { PokemonTCG } from 'pokemon-tcg-sdk-typescript';
 import { CardBundle, bundleCompare } from '@/types/bundle';
 
 export class Decklist {
-  public static fromJSON(jsonText: string | null) {
+  public static fromJSON(jsonText: string | null): Decklist {
     // I think there's a better way to do this ¯\_(ツ)_/¯
     const res = new Decklist();
     if (!!jsonText) {
@@ -14,6 +14,12 @@ export class Decklist {
       res.energyBundles = stored.energyBundles;
     }
     return res;
+  }
+  public static slotsFromJSON(jsonText: string | null): string[] {
+    if (!!jsonText) {
+      return JSON.parse(jsonText);
+    }
+    return [];
   }
 
   public title: string = '';
@@ -110,6 +116,13 @@ export class Decklist {
     } else {
       return false;
     }
+  }
+
+  public empty() {
+    this.title = '';
+    this.pokemonBundles = [];
+    this.trainerBundles = [];
+    this.energyBundles = [];
   }
 
   public findMatchingBundle(id: string): CardBundle|null {

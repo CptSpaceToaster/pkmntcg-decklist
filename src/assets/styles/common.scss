@@ -54,10 +54,9 @@ button {
   align-items: center;
 
   border-radius: 2px;
-  min-width: $default--min-clickable-height;
-  min-height: $default--min-clickable-height;
+  min-width: $default--min-clickable;
+  min-height: $default--min-clickable;
 
-  padding: 8px 16px;
   border: none;
   outline: none;
 
@@ -80,6 +79,11 @@ button {
   &.transparent-light {
     color: $transparent-light-button-color;
     background-color: $transparent-light-button-background-color;
+  }
+
+  &.transparent-dark {
+    color: $transparent-dark-button-color;
+    background-color: $transparent-dark-button-background-color;
   }
 
   &.primary {
@@ -108,6 +112,9 @@ button {
     &.transparent-light {
       background-color: $transparent-light-button-background-color-hover;
     }
+    &.transparent-dark {
+      background-color: $transparent-dark-button-background-color-hover;
+    }
   }
 }
 
@@ -116,11 +123,17 @@ button {
   font-size: 14px;
 }
 
+.single-line {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
 // SVGs
 .svg-icon {
   display: inline-block;
-  width: 20px;
-  height: 20px;
+  width: 26px;
+  height: 26px;
   color: inherit;
   vertical-align: middle;
   fill: none;
