@@ -105,12 +105,10 @@ export default class CardStack extends Vue {
   .card-stack-header {
     position: sticky;
     top: 0;
-    z-index: 100;
   }
   .card-stack-footer {
     position: sticky;
     bottom: 0;
-    z-index: 100;
   }
 }
 

@@ -24,10 +24,9 @@ export default class ModalHeader extends Vue {
 
 .modal-header {
   @include row();
-  padding: 10px;
+  padding-left: 10px;
+  padding-right: 10px;
   background: $secondary;
-  border-top-left-radius: 8px;
-  border-top-right-radius: 8px;
   border-bottom: 1px solid $border-color;
   font-size: 20px;
 
@@ -35,8 +34,9 @@ export default class ModalHeader extends Vue {
     flex: 1 1 auto;
   }
 
-  @include sm {
-    border-radius: 0;
+  @include lg {
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
   }
 }
 </style>

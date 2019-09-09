@@ -16,7 +16,7 @@ Vue.use(SvgIcon, {
 Vue.use(VueMq, {
   // These breakpoint should match those in _structure.scss
   breakpoints: {
-    sm: 550,
+    sm: 650,
     md: 1050,
     lg: Infinity,
   },

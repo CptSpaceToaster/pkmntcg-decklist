@@ -3,7 +3,6 @@
     <div class="card-pile-image-holder">
       <CardImage :src="card.imageUrl" v-for="n in count" :key="card.id + n" :style="offsetStyle(n - 1)"/>
     </div>
-    <!-- <CardInfo :card="card"/> -->
     <div class="single-line">{{card.name}}</div>
     <div class="single-line subhead">{{cardCode}}</div>
   </div>

@@ -4,7 +4,6 @@ import { PokemonTCG } from 'pokemon-tcg-sdk-typescript';
 
 // Root state specific
 export interface RootState {
-  windowWidth: number;
   sets: PokemonTCG.Set[];
   postRotationSets: PokemonTCG.Set[];
   standardSets: PokemonTCG.Set[];
@@ -34,4 +33,6 @@ export interface SearchState {
 
 export interface ModalState {
   loadDecklist: boolean;
+  card: PokemonTCG.Card;
+  cardInfo: boolean;
 }

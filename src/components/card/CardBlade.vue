@@ -1,10 +1,9 @@
 <template>
   <div class="card-blade">
-    <div class="crop" :style="cropStyle">
+    <div class="crop" :style="cropStyle" @click="showCardInfo()">
       <span class="outline bundle-count">{{bundle.count}}</span>
       <span class="outline">{{card.name}}</span>
     </div>
-    <!-- <CardInfo :card="card"/> -->
     <div class="controls">
       <button class="transparent-dark" @click="addCard()">
         <svgicon id="plus" name="plus" :original="true"/>
@@ -21,7 +20,7 @@ import Vue from 'vue';
 import CardInfo from '@/components/card/CardInfo.vue';
 import { Component, Prop } from 'vue-property-decorator';
 import { PokemonTCG } from 'pokemon-tcg-sdk-typescript';
-import { DECKLIST } from '@/store/actions';
+import { DECKLIST, MODAL } from '@/store/actions';
 import { CardBundle } from '@/types/bundle';
 
 @Component({
@@ -57,6 +56,10 @@ export default class Card extends Vue {
       background-repeat: no-repeat;
       background-position: -24px ${this.cropHeight};
       `;
+  }
+
+  private showCardInfo() {
+    this.$store.commit(MODAL.SET_CARD_INFO, this.card);
   }
 
   private addCard() {

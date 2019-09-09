@@ -3,6 +3,7 @@
     <navigation-header/>
     <router-view/>
     <LoadDecklistModal v-show="$store.state.modal.loadDecklist"/>
+    <CardInfoModal v-show="$store.state.modal.cardInfo" :card="$store.state.modal.card"/>
   </div>
 </template>
 
@@ -11,6 +12,7 @@ import Vue from 'vue';
 import NavigationHeader from '@/components/navigation/NavigationHeader.vue';
 import NavigationFooter from '@/components/navigation/NavigationFooter.vue';
 import LoadDecklistModal from '@/components/modals/LoadDecklistModal.vue';
+import CardInfoModal from '@/components/modals/CardInfoModal.vue';
 import { Component } from 'vue-property-decorator';
 import { ROOT, SEARCH } from '@/store/actions.ts';
 
@@ -18,23 +20,13 @@ import { ROOT, SEARCH } from '@/store/actions.ts';
   components: {
     NavigationHeader,
     LoadDecklistModal,
+    CardInfoModal,
   },
 })
 export default class App extends Vue {
   private mounted() {
-    // hacky responsiveness
-    window.addEventListener('resize', this.handleResize);
-
     this.$store.dispatch(ROOT.INITIALIZE_SETS);
     this.$store.dispatch(SEARCH.REQUEST);
-  }
-
-  private destroyed() {
-    window.removeEventListener('resize', this.handleResize);
-  }
-
-  private handleResize(event: Event) {
-    this.$store.commit(ROOT.WINDOW_WIDTH, window.innerWidth);
   }
 }
 </script>

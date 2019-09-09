@@ -1,6 +1,6 @@
 <template>
   <div class="card-grid" :class="{'loading': loading}">
-    <Card v-for="card in cards" :key="card.id" :card="card" @cardClicked="cardClicked(card)"/>
+    <Card v-for="card in cards" :key="card.id" :card="card" @cardClicked="cardClicked(card)" @showCardInfo="showCardInfo(card)"/>
   </div>
 </template>
 
@@ -9,7 +9,7 @@ import Vue from 'vue';
 import Card from '@/components/card/Card.vue';
 import { Component } from 'vue-property-decorator';
 import { PokemonTCG } from 'pokemon-tcg-sdk-typescript';
-import { DECKLIST } from '@/store/actions';
+import { DECKLIST, MODAL } from '@/store/actions';
 import { NavigationStatus } from '@/types/network';
 
 @Component({
@@ -33,6 +33,10 @@ export default class CardGrid extends Vue {
   public cardClicked(card: PokemonTCG.Card) {
     // console.log(card);
     this.$store.commit(DECKLIST.ADD_CARD, card);
+  }
+
+  public showCardInfo(card: PokemonTCG.Card) {
+    this.$store.commit(MODAL.SET_CARD_INFO, card);
   }
 }
 </script>

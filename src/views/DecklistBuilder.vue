@@ -48,15 +48,18 @@ export default class DecklistBuilder extends Vue {
 $card-stack-width: 300px;
 
 #search-bar-container {
+  z-index: 100;
   position: sticky;
   top: 0;
 }
 
 #card-grid-container {
+  z-index: 50;
   transition: padding-right $default--transition-duration ease;
 }
 
 #card-stack-container {
+  z-index: 200;
   position: fixed;
   right: 0;
   width: $card-stack-width;

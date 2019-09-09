@@ -54,17 +54,18 @@ export default class Modal extends Vue {
 .modal-container {
   display: flex;
   flex-direction: column;
-  margin: 100px;
-  flex: 1 1 auto;
 
-  border-radius: 8px;
+  margin: 0;
+  border-radius: 0;
+
+  flex: 1 1 auto;
   box-shadow: 0 2px 8px rgba(0, 0, 0, .33);
   transition: all .3s ease;
   background-color: white;
 
-  @include sm {
-    margin: 0;
-    border-radius: 0;
+  @include lg {
+    margin: 100px;
+    border-radius: 8px;
   }
 }
 
@@ -90,9 +91,9 @@ export default class Modal extends Vue {
 
 .modal-enter .modal-container,
 .modal-leave-active .modal-container {
-  @include sm {
-    -webkit-transform: translateY(100%);
-    transform: translateY(100%);
+  transform: translateY(100%);
+  @include lg {
+    transform: none;
   }
 }
 </style>

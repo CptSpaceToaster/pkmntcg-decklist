@@ -1,9 +1,16 @@
 <template>
   <div class="card">
     <CardImage :src="card.imageUrl" @imageClicked="$emit('cardClicked')"/>
-    <!-- <CardInfo :card="card"/> -->
-    <div class="single-line">{{card.name}}</div>
-    <div class="single-line subhead">{{cardCode}}</div>
+    <div class="card-info">
+      <div class="card-info-text">
+        <div class="single-line">{{card.name}}</div>
+        <div class="single-line subhead">{{cardCode}}</div>
+      </div>
+      <button class="transparent-light" @click="$emit('showCardInfo')">
+        <svgicon id="mag" name="mag" :original="true" />
+      </button>
+    </div>
+
   </div>
 </template>
 
@@ -49,6 +56,13 @@ export default class Card extends Vue {
 
   >:first-child {
     margin-bottom: 10px;
+  }
+
+  .card-info {
+    @include row($justify: center);
+    .card-info-text {
+      min-width: 0;
+    }
   }
 }
 </style>

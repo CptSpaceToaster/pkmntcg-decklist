@@ -32,7 +32,6 @@ import { Component } from 'vue-property-decorator';
 import Modal from '@/components/modals/Modal.vue';
 import ModalHeader from '@/components/modals/ModalHeader.vue';
 import ModalBody from '@/components/modals/ModalBody.vue';
-// import ModalFooter from '@/components/modals/ModalFooter.vue';
 import { MODAL, DECKLIST } from '@/store/actions';
 
 @Component({
