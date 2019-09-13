@@ -3,9 +3,12 @@ import Router from 'vue-router';
 import DecklistBuilder from '@/views/DecklistBuilder.vue';
 import DecklistInspector from '@/views/DecklistInspector.vue';
 
+import store from '@/store';
+import { MODAL } from '@/store/actions';
+
 Vue.use(Router);
 
-export default new Router({
+const router = new Router({
   routes: [
     {
       path: '/',
@@ -35,3 +38,10 @@ export default new Router({
     },
   ],
 });
+
+router.beforeEach((to, from, next) => {
+  store.commit(MODAL.SHOW_CARD_INFO, to.query.card !== undefined);
+  next();
+});
+
+export default router;

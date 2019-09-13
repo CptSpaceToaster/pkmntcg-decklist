@@ -33,7 +33,8 @@ export default class LoadDecklistModal extends Vue {
   @Prop() public card!: PokemonTCG.Card;
 
   private close() {
-    this.$store.commit(MODAL.SHOW_CARD_INFO, false);
+    // this.$store.commit(MODAL.SHOW_CARD_INFO, false);
+    this.$router.go(-1);
   }
 }
 </script>

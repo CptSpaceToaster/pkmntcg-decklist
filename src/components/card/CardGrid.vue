@@ -31,12 +31,12 @@ export default class CardGrid extends Vue {
   }
 
   public cardClicked(card: PokemonTCG.Card) {
-    // console.log(card);
     this.$store.commit(DECKLIST.ADD_CARD, card);
   }
 
   public showCardInfo(card: PokemonTCG.Card) {
     this.$store.commit(MODAL.SET_CARD_INFO, card);
+    this.$router.push({ path: this.$route.name, query: { card: card.id }});
   }
 }
 </script>

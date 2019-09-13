@@ -26,6 +26,8 @@ export default class ModalHeader extends Vue {
   @include row();
   padding-left: 10px;
   padding-right: 10px;
+  padding-top: 5px;
+  padding-bottom: 5px;
   background: $secondary;
   border-bottom: 1px solid $border-color;
   font-size: 20px;

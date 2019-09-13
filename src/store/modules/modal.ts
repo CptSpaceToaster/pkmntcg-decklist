@@ -6,7 +6,9 @@ import { PokemonTCG } from 'pokemon-tcg-sdk-typescript';
 function clear(state: ModalState) {
   for (const key in state) {
     if (!!key) {
-      (state as any)[key] = false;
+      if (typeof (state as any)[key] === 'boolean') {
+        (state as any)[key] = false;
+      }
     }
   }
 }
@@ -30,7 +32,7 @@ export const module: Module<ModalState, RootState> = {
     [MODAL.SET_CARD_INFO]: (state, card: PokemonTCG.Card) => {
       clear(state);
       state.card = card;
-      state.cardInfo = true;
+      // state.cardInfo = true;
     },
     [MODAL.SHOW_CARD_INFO]: (state, value: boolean = true) => {
       clear(state);
