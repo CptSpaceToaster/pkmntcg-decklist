@@ -13,7 +13,7 @@
     "axios": "^0.19.0",
     "lodash": "^4.17.14",
     "moment": "^2.24.0",
-    "pokemon-tcg-sdk-typescript": "^1.1.0",
+    "pokemon-tcg-sdk-typescript": "../pokemon-tcg-sdk-typescript/pokemon-tcg-sdk-typescript-1.2.1.tgz",
     "vue": "^2.6.10",
     "vue-class-component": "^7.0.2",
     "vue-mq": "^1.0.1",

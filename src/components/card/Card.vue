@@ -10,7 +10,6 @@
         <svgicon id="mag" name="mag" :original="true" />
       </button>
     </div>
-
   </div>
 </template>
 

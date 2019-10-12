@@ -5768,10 +5768,9 @@ pkg-up@^2.0.0:
   dependencies:
     find-up "^2.1.0"
 
-pokemon-tcg-sdk-typescript@^1.1.0:
+pokemon-tcg-sdk-typescript@../pokemon-tcg-sdk-typescript/pokemon-tcg-sdk-typescript-1.2.1.tgz:
   version "1.2.1"
-  resolved "https://registry.yarnpkg.com/pokemon-tcg-sdk-typescript/-/pokemon-tcg-sdk-typescript-1.2.1.tgz#fcd9dd130bda220b4a038ac8d049255f5fe8e121"
-  integrity sha512-562AGTEuN1L7MtbwhLYCBdnwSwlfHJ3k4/fgCNhKWDL33emFcDItwZGPcg7b8PzZHHBFhG62cshuOqxH+BZJrA==
+  resolved "../pokemon-tcg-sdk-typescript/pokemon-tcg-sdk-typescript-1.2.1.tgz#26ebe11794c690ea33b97630afa8baf554aa9c8f"
   dependencies:
     axios "^0.19.0"
     typescript "^2.6.2"
