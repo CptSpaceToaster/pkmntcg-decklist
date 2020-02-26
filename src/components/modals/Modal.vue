@@ -49,6 +49,11 @@ export default class Modal extends Vue {
   display: flex;
   justify-content: center;
   align-items: stretch;
+
+  @include lg {
+    align-items: center;
+    border-radius: 8px;
+  }
 }
 
 .modal-container {
@@ -64,7 +69,7 @@ export default class Modal extends Vue {
   background-color: white;
 
   @include lg {
-    margin: 100px;
+    flex: 0 1 auto;
     border-radius: 8px;
   }
 }

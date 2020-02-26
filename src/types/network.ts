@@ -5,6 +5,7 @@ export enum NavigationStatus {
 export interface CardPrice {
   id: string;
   tcg_player_id: string;
+  url: string;
 
   normal_directLowPrice: number | null;
   normal_highPrice: number | null;

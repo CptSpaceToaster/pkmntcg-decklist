@@ -20,6 +20,7 @@ export const module: Module<ModalState, RootState> = {
   state: {
     loadDecklist: false,
     cardInfo: false,
+    closeNormal: false,
     card: {} as PokemonTCG.Card, // hacks
     cardPrice: {
       normal_marketPrice: null,
@@ -41,6 +42,9 @@ export const module: Module<ModalState, RootState> = {
       clear(state);
       state.cardInfo = value;
     },
+    [MODAL.SET_CLOSE_INFO_NORMAL]: (state, value: boolean = true) => {
+      state.closeNormal = value;
+    },
     [MODAL.SET_CARD_INFO]: (state, card: PokemonTCG.Card) => {
       state.card = card;
     },
@@ -49,19 +53,26 @@ export const module: Module<ModalState, RootState> = {
     },
   },
   actions: {
-    [MODAL.LOAD_CARD_INFO]: ({ commit }, id: string) => {
+    [MODAL.LOAD_CARD_INFO]: ({ state, commit }, id: string) => {
+      if (state.card.id === id) {
+        return;
+      }
+
       PokemonTCG.Card.find(id)
         .then((card: PokemonTCG.Card) => {
           commit(MODAL.SET_CARD_INFO, card);
         });
     },
-    [MODAL.LOAD_CARD_PRICE]: ({ commit }, card: PokemonTCG.Card) => {
+    [MODAL.LOAD_CARD_PRICE]: ({ state, commit }, id: string) => {
+      if (state.cardPrice.id === id) {
+        return;
+      }
       commit(MODAL.SET_CARD_PRICE, {
         normal_marketPrice: null,
         holofoil_marketPrice: null,
         reverse_holofoil_marketPrice: null,
       } as CardPrice);
-      getCardPrice(card)
+      getCardPrice(id)
         .then((cardPrice: CardPrice) => {
           commit(MODAL.SET_CARD_PRICE, cardPrice);
         });

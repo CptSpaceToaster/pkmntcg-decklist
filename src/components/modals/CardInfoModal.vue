@@ -38,8 +38,12 @@ export default class LoadCardModal extends Vue {
   @Prop() public card!: PokemonTCG.Card;
 
   private close() {
-    // this.$store.commit(MODAL.SHOW_CARD_INFO, false);
-    this.$router.go(-1);
+    if (this.$store.state.modal.closeNormal) {
+      this.$router.go(-1);
+    } else {
+      this.$router.replace('/');
+      this.$store.commit(MODAL.SHOW_CARD_INFO, false);
+    }
   }
 }
 </script>

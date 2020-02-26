@@ -33,7 +33,8 @@ export interface SearchState {
 
 export interface ModalState {
   loadDecklist: boolean;
-  card: PokemonTCG.Card;
   cardInfo: boolean;
+  closeNormal: boolean;
+  card: PokemonTCG.Card;
   cardPrice: CardPrice;
 }

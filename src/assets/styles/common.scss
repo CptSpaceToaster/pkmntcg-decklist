@@ -109,6 +109,7 @@ button {
 
 @media (hover: hover) {
   button:hover {
+    cursor: pointer;
     &.transparent-light {
       background-color: $transparent-light-button-background-color-hover;
     }

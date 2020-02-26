@@ -4,11 +4,11 @@ import { PokemonTCG } from 'pokemon-tcg-sdk-typescript';
 import { CardPrice } from '@/types/network';
 
 export function getCardPrice(
-  card: PokemonTCG.Card,
+  id: string,
   client: AxiosInstance = Client,
 ): Promise<CardPrice> {
   return new Promise((resolve, reject) => {
-    client.get(`/card/${card.id}`)
+    client.get(`/card/${id}`)
       .then((response) => {
         resolve(response.data);
       })
