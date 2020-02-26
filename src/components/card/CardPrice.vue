@@ -41,15 +41,24 @@ export default class CardInfo extends Vue {
 .card-price {
   text-align: center;
   position: relative;
+  top: 10px;
+  padding-top: 10px;
 }
 
 .card-price:hover {
   cursor: pointer;
 }
 
+h3 {
+  margin: 0;
+}
+h5 {
+  margin: 10px;
+}
+
 #open-to-tcg {
   position: absolute;
-  top: -10px;
+  top: 0px;
   right: 0px;
 }
 </style>
