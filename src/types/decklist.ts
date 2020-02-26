@@ -165,7 +165,7 @@ export class Decklist {
       }
       return 1;
     }
-    if (card.rarity.includes('ACE')) {
+    if (card.rarity && card.rarity.includes('ACE')) {
       for (const bundle of this.trainerBundles) {
         if (bundle.card.rarity.includes('ACE')) {
           return 0;

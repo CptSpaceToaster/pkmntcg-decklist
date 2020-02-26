@@ -40,6 +40,9 @@ const router = new Router({
 });
 
 router.beforeEach((to, from, next) => {
+  if (to.query.card !== undefined) {
+    store.dispatch(MODAL.LOAD_CARD_INFO, to.query.card);
+  }
   store.commit(MODAL.SHOW_CARD_INFO, to.query.card !== undefined);
   next();
 });

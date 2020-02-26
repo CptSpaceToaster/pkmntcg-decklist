@@ -1,5 +1,5 @@
 import { Decklist } from '@/types/decklist';
-import { NavigationStatus } from '@/types/network';
+import { NavigationStatus, CardPrice } from '@/types/network';
 import { PokemonTCG } from 'pokemon-tcg-sdk-typescript';
 
 // Root state specific
@@ -35,4 +35,5 @@ export interface ModalState {
   loadDecklist: boolean;
   card: PokemonTCG.Card;
   cardInfo: boolean;
+  cardPrice: CardPrice;
 }

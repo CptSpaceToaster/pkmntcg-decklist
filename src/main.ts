@@ -28,6 +28,18 @@ Vue.use(VueTippy, {
   trigger: 'click',
 });
 
+Vue.filter('toCurrency', (value: number) => {
+  if (typeof value !== 'number') {
+      return value;
+  }
+  const formatter = new Intl.NumberFormat('en-US', {
+      style: 'currency',
+      currency: 'USD',
+      minimumFractionDigits: 2,
+  });
+  return formatter.format(value);
+});
+
 new Vue({
   store,
   router,

@@ -36,6 +36,7 @@ export default class CardGrid extends Vue {
 
   public showCardInfo(card: PokemonTCG.Card) {
     this.$store.commit(MODAL.SET_CARD_INFO, card);
+    this.$store.dispatch(MODAL.LOAD_CARD_PRICE, card);
     this.$router.push({ path: this.$route.name, query: { card: card.id }});
   }
 }
