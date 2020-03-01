@@ -6,6 +6,9 @@
     <button class="transparent-light" @click="$emit('saveToFile')" @shown="delay2" v-tippy="{content: 'Saving!'}">
       <svgicon id="save_to_text" name="save_to_text" :original="true"/>
     </button>
+    <button class="transparent-light" @click="$emit('importFromText')" @shown="delay2">
+      <svgicon id="import_from_clipboard" name="import_from_clipboard" :original="true"/>
+    </button>
     <button class="transparent-light" @click="$emit('trash')" @shown="delay2" v-tippy="{content: 'Cleared!'}">
       <svgicon id="trash" name="trash" :original="true"/>
     </button>

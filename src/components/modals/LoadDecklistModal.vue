@@ -46,7 +46,12 @@ export default class LoadDecklistModal extends Vue {
     return this.$store.state.decklist.slots;
   }
   private close() {
-    this.$store.commit(MODAL.LOAD_DECKLIST, false);
+    if (this.$store.state.modal.closeNormal) {
+      this.$router.go(-1);
+    } else {
+      this.$router.replace('/');
+      this.$store.commit(MODAL.LOAD_DECKLIST, false);
+    }
   }
 
   private deckLoad(deck: string) {

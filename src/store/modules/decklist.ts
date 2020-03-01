@@ -2,6 +2,11 @@ import { Module } from 'vuex';
 import { DecklistState, RootState } from '@/types/state';
 import { DECKLIST } from '@/store/actions';
 import { Decklist } from '@/types/decklist';
+import { PokemonTCG } from 'pokemon-tcg-sdk-typescript';
+
+export async function asyncForEach<T>(array: T[], callback: (item: T, index: number, allItems: T[]) => void) {
+  await Promise.all(array.map(callback));
+}
 
 export const module: Module<DecklistState, RootState> = {
   state: {
@@ -51,5 +56,43 @@ export const module: Module<DecklistState, RootState> = {
     },
   },
   actions: {
+    [DECKLIST.LOAD_FROM_STRING]: async ({ state, rootGetters }, decklistText: string) => {
+      const res = new Decklist();
+      const lines = decklistText.split('\n').filter((line: string) => !(line.includes('**') && !line.includes('##')));
+
+      await Promise.all(lines.map(async (line: string) => {
+        const tokens = line.split(' ');
+        if (tokens.length <= 2) {
+          return;
+        }
+
+        const quantity = parseInt(tokens[0], 10);
+        if (isNaN(quantity)) {
+          return;
+        }
+
+        const setNum = tokens[tokens.length - 1];
+        const ptcgoCode = tokens[tokens.length - 2];
+        const set = rootGetters.allSets.find((set: PokemonTCG.Set) => ptcgoCode === set.ptcgoCode);
+
+        if (set === undefined) {
+          const energyID = parseInt(setNum, 10);
+          if (isNaN(energyID) || (energyID > 9)) {
+            return;
+          }
+          const card = await PokemonTCG.Card.find(`sm1-${163 + energyID}`);
+          res.addCard(card, quantity);
+        } else {
+          const results = await PokemonTCG.Card.where([{name: 'setCode', value: set.code}, {name: 'number', value: setNum}]);
+          const card = results.find(() => true);
+          if (card !== undefined) {
+            res.addCard(card, quantity);
+          }
+        }
+      }));
+
+      res.sort();
+      state.decklist = res;
+    },
   },
 };

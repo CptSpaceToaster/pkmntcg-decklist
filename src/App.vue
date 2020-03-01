@@ -3,6 +3,7 @@
     <navigation-header/>
     <router-view/>
     <LoadDecklistModal v-show="$store.state.modal.loadDecklist"/>
+    <ImportDecklistModal v-show="$store.state.modal.importDecklist"/>
     <CardInfoModal v-show="$store.state.modal.cardInfo" :card="$store.state.modal.card"/>
   </div>
 </template>
@@ -12,6 +13,7 @@ import Vue from 'vue';
 import NavigationHeader from '@/components/navigation/NavigationHeader.vue';
 import NavigationFooter from '@/components/navigation/NavigationFooter.vue';
 import LoadDecklistModal from '@/components/modals/LoadDecklistModal.vue';
+import ImportDecklistModal from '@/components/modals/ImportDecklistModal.vue';
 import CardInfoModal from '@/components/modals/CardInfoModal.vue';
 import { Component } from 'vue-property-decorator';
 import { ROOT, SEARCH } from '@/store/actions.ts';
@@ -20,6 +22,7 @@ import { ROOT, SEARCH } from '@/store/actions.ts';
   components: {
     NavigationHeader,
     LoadDecklistModal,
+    ImportDecklistModal,
     CardInfoModal,
   },
 })

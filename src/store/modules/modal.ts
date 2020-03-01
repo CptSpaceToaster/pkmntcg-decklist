@@ -9,7 +9,7 @@ import { getCardPrice } from '@/network/endpoints';
 function clear(state: ModalState) {
   for (const key in state) {
     if (!!key) {
-      if (typeof (state as any)[key] === 'boolean') {
+      if (typeof (state as any)[key] === 'boolean' && key !== 'closeNormal') {
         (state as any)[key] = false;
       }
     }
@@ -19,6 +19,7 @@ function clear(state: ModalState) {
 export const module: Module<ModalState, RootState> = {
   state: {
     loadDecklist: false,
+    importDecklist: false,
     cardInfo: false,
     closeNormal: false,
     card: {} as PokemonTCG.Card, // hacks
@@ -31,12 +32,13 @@ export const module: Module<ModalState, RootState> = {
   getters: {
   },
   mutations: {
-    [MODAL.CLEAR]: (state) => {
-      clear(state);
-    },
     [MODAL.LOAD_DECKLIST]: (state, value: boolean = true) => {
       clear(state);
       state.loadDecklist = value;
+    },
+    [MODAL.IMPORT_DECKLIST]: (state, value: boolean = true) => {
+      clear(state);
+      state.importDecklist = value;
     },
     [MODAL.SHOW_CARD_INFO]: (state, value: boolean = true) => {
       clear(state);
@@ -53,6 +55,9 @@ export const module: Module<ModalState, RootState> = {
     },
   },
   actions: {
+    [MODAL.CLEAR]: ({ state }) => {
+      clear(state);
+    },
     [MODAL.LOAD_CARD_INFO]: ({ state, commit }, id: string) => {
       if (state.card.id === id) {
         return;

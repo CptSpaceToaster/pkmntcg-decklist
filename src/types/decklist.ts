@@ -48,46 +48,49 @@ export class Decklist {
   get count(): number {
     return this.pokemonCount + this.trainerCount + this.energyCount;
   }
+  get url(): string {
+    return window.location.protocol + '//' + window.location.host + window.location.pathname + window.location.hash;
+  }
   public toString(): string {
     let res = `****** Pokémon Trading Card Game Deck List ******\n\n##Pokémon - ${this.pokemonCount}\n`;
     for (const bundle of this.pokemonBundles) {
-      res += `\n* ${bundle.count} ${bundle.card.name} ${this.getPTCGOCode(bundle.card)} ${bundle.card.number}`;
+      res += `\n${bundle.count} ${bundle.card.name} ${this.getPTCGOCode(bundle.card)} ${bundle.card.number}`;
     }
     res += `\n\n##Trainer Cards - ${this.trainerCount}\n`;
     for (const bundle of this.trainerBundles) {
-      res += `\n* ${bundle.count} ${bundle.card.name} ${this.getPTCGOCode(bundle.card)} ${bundle.card.number}`;
+      res += `\n${bundle.count} ${bundle.card.name} ${this.getPTCGOCode(bundle.card)} ${bundle.card.number}`;
     }
     res += `\n\n##Energy - ${this.energyCount}\n`;
     for (const bundle of this.energyBundles) {
       if (bundle.card.subtype === 'Basic') {
-        res += `\n* ${bundle.count} ${bundle.card.name} ${this.getEnergyID(bundle.card)}`;
+        res += `\n${bundle.count} ${bundle.card.name} ${this.getEnergyID(bundle.card)}`;
       } else {
-        res += `\n* ${bundle.count} ${bundle.card.name} ${this.getPTCGOCode(bundle.card)} ${bundle.card.number}`;
+        res += `\n${bundle.count} ${bundle.card.name} ${this.getPTCGOCode(bundle.card)} ${bundle.card.number}`;
       }
     }
-    res += `\n\nTotal Cards - ${this.count}\n\n****** Deck List Generated at ${window.location.host + window.location.pathname + window.location.hash} ******`;
+    res += `\n\nTotal Cards - ${this.count}\n\n****** Deck List Generated at ${this.url} ******`;
     return res;
   }
 
-  public addCard(card: PokemonTCG.Card): boolean {
-    if (this.countMatchingNames(card.name) >= this.cardLimit(card)) {
+  public addCard(card: PokemonTCG.Card, quantity = 1): boolean {
+    if (this.countMatchingNames(card.name) + quantity > this.cardLimit(card)) {
       return false;
     }
 
     const bundle = this.findMatchingBundle(card.id);
     if (bundle) {
-      bundle.count++;
+      bundle.count += quantity;
       return true;
     } else {
       switch (card.supertype) {
         case 'Trainer':
-          this.trainerBundles.push({ card, count: 1 });
+          this.trainerBundles.push({ card, count: quantity });
           break;
         case 'Energy':
-          this.energyBundles.push({ card, count: 1 });
+          this.energyBundles.push({ card, count: quantity });
           break;
         default:
-          this.pokemonBundles.push({ card, count: 1 });
+          this.pokemonBundles.push({ card, count: quantity });
       }
       return true;
     }

@@ -40,11 +40,18 @@ const router = new Router({
 });
 
 router.beforeEach((to, from, next) => {
-  if (to.query.card !== undefined) {
+  if (to.query.action === 'load') {
+    store.commit(MODAL.LOAD_DECKLIST, true);
+  } else if (to.query.action === 'import') {
+    store.commit(MODAL.IMPORT_DECKLIST, true);
+  } else if (to.query.card !== undefined) {
     store.dispatch(MODAL.LOAD_CARD_INFO, to.query.card);
     store.dispatch(MODAL.LOAD_CARD_PRICE, to.query.card);
+    store.commit(MODAL.SHOW_CARD_INFO, true);
+  } else {
+    store.dispatch(MODAL.CLEAR);
   }
-  store.commit(MODAL.SHOW_CARD_INFO, to.query.card !== undefined);
+
   next();
 });
 

@@ -32,7 +32,7 @@ export default class Modal extends Vue {
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 @import '@style/_structure.scss';
 @import '@style/_colors.scss';
 
@@ -44,6 +44,7 @@ export default class Modal extends Vue {
   width: 100%;
   height: 100%;
   background-color: rgba(0, 0, 0, .5);
+
   transition: opacity .3s ease;
 
   display: flex;

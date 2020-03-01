@@ -58,7 +58,11 @@ export default new Vuex.Store<RootState>({
       'Colorless',
     ],
   },
-  getters: {},
+  getters: {
+    allSets: (state): PokemonTCG.Set[] => {
+      return state.sets;
+    },
+  },
   mutations: {
     [ROOT.SETS]: (state, sets: PokemonTCG.Set[]) => {
       state.sets = sets;

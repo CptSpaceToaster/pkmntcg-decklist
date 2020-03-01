@@ -18,6 +18,7 @@
     <CardStackFooter
       @copyToClipboard="copyToClipboard"
       @saveToFile="saveToFile"
+      @importFromText="importFromText"
       @trash="trash"
       @saveToDisk="saveToDisk"
       @importFromDisk="importFromDisk"
@@ -77,6 +78,11 @@ export default class CardStack extends Vue {
     document.body.removeChild(pom);
   }
 
+  private importFromText() {
+    this.$store.commit(MODAL.SET_CLOSE_INFO_NORMAL);
+    this.$router.push({ path: this.$route.name, query: { action: 'import' }});
+  }
+
   private trash() {
     this.$store.commit(DECKLIST.EMPTY);
   }
@@ -87,7 +93,8 @@ export default class CardStack extends Vue {
   }
 
   private importFromDisk() {
-    this.$store.commit(MODAL.LOAD_DECKLIST, true);
+    this.$store.commit(MODAL.SET_CLOSE_INFO_NORMAL);
+    this.$router.push({ path: this.$route.name, query: { action: 'load' }});
   }
 }
 </script>
