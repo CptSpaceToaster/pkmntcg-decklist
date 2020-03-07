@@ -1,7 +1,6 @@
 <template>
   <div class="decklist-inspector">
     <DeckGrid id="deck-grid-container"/>
-    <CardStackHeader id="card-stack-header-container" @toggleInspector="gotoBuilder()" @toggleDecklist="toggleList()"/>
   </div>
 </template>
 
@@ -10,6 +9,7 @@ import Vue from 'vue';
 import DeckGrid from '@/components/card/DeckGrid.vue';
 import { Component } from 'vue-property-decorator';
 import { Decklist } from '@/types/decklist';
+import { MODAL } from '@/store/actions';
 
 @Component({
   components: {
@@ -23,11 +23,8 @@ export default class DecklistInspector extends Vue {
     return this.$store.state.decklist.decklist;
   }
 
-  private toggleList() {
-    this.isCardStackShown = !this.isCardStackShown;
-  }
-
   private gotoBuilder() {
+    this.$store.commit(MODAL.SET_CLOSE_INFO_NORMAL);
     this.$router.push('builder');
   }
 }

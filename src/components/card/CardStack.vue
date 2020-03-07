@@ -108,14 +108,17 @@ export default class CardStack extends Vue {
   display: flex;
   flex-direction: column;
   background-color: $decklist-background-color;
-  overflow-y: overlay;
+
+  -webkit-overflow-scrolling: touch;
 
   .card-stack-header {
+    flex: 0 0 auto;
     position: sticky;
     top: 0;
     z-index: 100;
   }
   .card-stack-footer {
+    flex: 0 0 auto;
     position: sticky;
     bottom: 0;
     z-index: 100;
@@ -129,6 +132,7 @@ export default class CardStack extends Vue {
 }
 
 .header-info {
+  flex: 0 0 auto;
   @include row(0, $justify: space-around);
   margin: 4px 0;
   .outline {

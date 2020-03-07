@@ -3,7 +3,7 @@
     <div class="single-line title">{{ this.$route.meta.navigationTitle }}</div>
     <div class="routes">
       <router-link :to="{ path: 'builder' }">Creator</router-link>
-      <router-link :to="{ path: 'inspector' }">Inspector</router-link>
+      <!-- <router-link :to="{ path: 'inspector' }">Inspector</router-link> -->
     </div>
 
     <a href="https://github.com/CptSpaceToaster/pkmntcg-decklist">

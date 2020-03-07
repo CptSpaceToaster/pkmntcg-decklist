@@ -15,6 +15,7 @@ import CardStack from '@/components/card/CardStack.vue';
 import SearchFilters from '@/components/search/SearchFilters.vue';
 import { Component } from 'vue-property-decorator';
 import { Decklist } from '@/types/decklist';
+import { MODAL } from '@/store/actions';
 
 @Component({
   components: {
@@ -32,6 +33,7 @@ export default class DecklistBuilder extends Vue {
   }
 
   private gotoInspector() {
+    this.$store.commit(MODAL.SET_CLOSE_INFO_NORMAL);
     this.$router.push('inspector');
   }
 
