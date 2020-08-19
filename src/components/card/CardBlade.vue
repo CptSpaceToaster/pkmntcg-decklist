@@ -62,7 +62,7 @@ export default class Card extends Vue {
     this.$store.commit(MODAL.SET_CLOSE_INFO_NORMAL);
     this.$store.commit(MODAL.SET_CARD_INFO, this.card);
     this.$store.dispatch(MODAL.LOAD_CARD_PRICE, this.card.id);
-    this.$router.push({ path: this.$route.name, query: { card: this.card.id }});
+    this.$router.push({ path: this.$route.name || undefined, query: { card: this.card.id }});
   }
 
   private addCard() {

@@ -3,7 +3,7 @@
     <div class="search-filters">
       <div class='heirloom-filters'>
         <span>
-          <input @input="searchName" class="search-input" placeholder="Card Name">
+          <input @input="searchName" ref="search-input" id="search-input" class="search-input" placeholder="Card Name">
           <button class="transparent-light" @click="filtersCollapsed = !filtersCollapsed">
             <svgicon id="chevron" name="chevron" :original="true" :class="{'collapsed': filtersCollapsed}"/>
           </button>
@@ -48,7 +48,7 @@
 import Vue from 'vue';
 import globals from '@/globals';
 import Multiselect from 'vue-multiselect';
-import { Component } from 'vue-property-decorator';
+import { Component, Ref } from 'vue-property-decorator';
 import { debounce } from 'lodash';
 import { SEARCH } from '@/store/actions';
 import { PokemonTCG } from 'pokemon-tcg-sdk-typescript';
@@ -59,6 +59,12 @@ import { PokemonTCG } from 'pokemon-tcg-sdk-typescript';
   },
 })
 export default class SearchFilters extends Vue {
+  public dispatchSearch = debounce(() => {
+    this.$store.dispatch(SEARCH.REQUEST);
+  }, globals.debounceInterval);
+
+  @Ref('search-input') private readonly searchInput!: HTMLInputElement;
+
   get availableSets(): PokemonTCG.Set[] {
     return [{
         code: 'Standard',
@@ -193,10 +199,6 @@ export default class SearchFilters extends Vue {
     return this.filterSupertypes === 'Trainer' || this.filterSupertypes === 'Energy';
   }
 
-  public dispatchSearch = debounce(() => {
-    this.$store.dispatch(SEARCH.REQUEST);
-  }, globals.debounceInterval);
-
   private filtersCollapsed = !(window.innerWidth > 550);
 
   public searchName(event: any) {
@@ -207,6 +209,10 @@ export default class SearchFilters extends Vue {
   public searchText(event: any) {
     this.$store.commit(SEARCH.TEXT, event.target.value);
     this.dispatchSearch();
+  }
+
+  private mounted() {
+    this.searchInput.value = this.$store.state.search.name;
   }
 }
 </script>

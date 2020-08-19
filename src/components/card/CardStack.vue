@@ -80,7 +80,7 @@ export default class CardStack extends Vue {
 
   private importFromText() {
     this.$store.commit(MODAL.SET_CLOSE_INFO_NORMAL);
-    this.$router.push({ path: this.$route.name, query: { action: 'import' }});
+    this.$router.push({ path: this.$route.name || undefined, query: { action: 'import' }});
   }
 
   private trash() {
@@ -94,7 +94,7 @@ export default class CardStack extends Vue {
 
   private importFromDisk() {
     this.$store.commit(MODAL.SET_CLOSE_INFO_NORMAL);
-    this.$router.push({ path: this.$route.name, query: { action: 'load' }});
+    this.$router.push({ path: this.$route.name || undefined, query: { action: 'load' }});
   }
 }
 </script>

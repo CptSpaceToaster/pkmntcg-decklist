@@ -38,7 +38,7 @@ export default class CardGrid extends Vue {
     this.$store.commit(MODAL.SET_CLOSE_INFO_NORMAL);
     this.$store.commit(MODAL.SET_CARD_INFO, card);
     this.$store.dispatch(MODAL.LOAD_CARD_PRICE, card.id);
-    this.$router.push({ path: this.$route.name, query: { card: card.id }});
+    this.$router.push({ path: this.$route.name || undefined, query: { card: card.id }});
   }
 }
 </script>
